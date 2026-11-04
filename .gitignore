@@ -1,0 +1,38 @@
+# =============================================================================
+# .gitignore - Biomolecular Modelling Laboratory (BML) - Project 2MYO
+# =============================================================================
+# IMPORTANTE: Le traiettorie MD (.dcd) e i file binari di restart (.coor, .vel)
+# possono pesare da centinaia di MB a diversi GB. NON vanno committati su Git!
+# Versionate su Git solo script (.tcl, .py, .sh), configurazioni (.conf, .cfg),
+# strutture iniziali/riparate (.pdb), e risultati tabulari/grafici (.dat, .txt, .fxout).
+
+# --- Traiettorie e binari NAMD pesanti ---
+*.dcd
+*.trr
+*.xtc
+*.coor
+*.vel
+*.BAK
+*.old
+FFTW_*.txt
+
+# --- Log di simulazione molto grandi (opzionale: forzate con git add -f se piccoli) ---
+*.log
+
+# --- File temporanei di VMD e FoldX ---
+*.vmd.t/
+*.tga
+rotabase.txt
+Unrecognized_molecules.txt
+/tmp/*
+
+# --- OS & Editor files ---
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+__pycache__/
+*.pyc
