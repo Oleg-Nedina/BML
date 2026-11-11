@@ -1,0 +1,124 @@
+==========================================================================
+ REPORT RESIDUI LOCALMENTE INSTABILI A 400 K (Bekker et al., 2019)
+ Finestra temporale analizzata: Frame 7 - 10 (su 11)
+==========================================================================
+Resid  Resname  Repeat   N_cont(0)  <Q_i>_400K   Stato / Candidato   
+--------------------------------------------------------------------------
+1      MET      ANK1     32         0.8047       TERMINAL            
+2      CYS      ANK1     60         0.8333       TERMINAL            
+3      ASP      ANK1     67         0.8134       TERMINAL            
+4      LYS      ANK1     72         0.7500       MASKED (CP-binding) 
+5      GLU      ANK1     70         0.8000       MASKED (CP-binding) 
+6      PHE      ANK1     97         0.6804       WEAK (0.6<=Q<0.72)  
+7      MET      ANK1     84         0.8185       MASKED (CP-binding) 
+8      TRP      ANK1     83         0.7861       MASKED (CP-binding) 
+9      ALA      ANK1     101        0.7401       MASKED (CP-binding) 
+10     LEU      ANK1     91         0.6401       WEAK (0.6<=Q<0.72)  
+11     LYS      ANK1     72         0.8160       MASKED (CP-binding) 
+12     ASN      ANK1     64         0.7031       MASKED (CP-binding) 
+13     GLY      ANK1     64         0.7422       STABLE              
+14     ASP      ANK1     114        0.5439       MASKED (CP-binding) 
+15     LEU      ANK1     85         0.7206       STABLE              
+16     ASP      ANK1     61         0.7705       MASKED (CP-binding) 
+17     GLU      ANK1     89         0.6657       MASKED (CP-binding) 
+18     VAL      ANK1     85         0.7853       STABLE              
+19     LYS      ANK1     80         0.9031       STABLE              
+20     ASP      ANK1     69         0.7971       STABLE              
+21     TYR      ANK1     94         0.6144       WEAK (0.6<=Q<0.72)  
+22     VAL      ANK1     76         0.7204       STABLE              
+23     ALA      ANK1     56         0.8080       STABLE              
+24     LYS      ANK1     51         0.7941       STABLE              
+25     GLY      ANK1     49         0.8010       STABLE              
+26     GLU      ANK1     41         0.8171       STABLE              
+27     ASP      ANK1     66         0.6742       WEAK (0.6<=Q<0.72)  
+28     VAL      ANK1     67         0.5858       >>> UNSTABLE (Q<0.6) <<<
+29     ASN      ANK1     53         0.7028       WEAK (0.6<=Q<0.72)  
+30     ARG      ANK1     57         0.7325       STABLE              
+31     THR      ANK1     52         0.9135       STABLE              
+32     LEU      ANK1     75         0.6933       WEAK (0.6<=Q<0.72)  
+33     GLU      ANK1     44         0.8125       STABLE              
+34     GLY      ANK1     34         0.8676       MASKED (CP-binding) 
+35     GLY      ANK2     39         0.8462       STABLE              
+36     ARG      ANK2     67         0.7239       MASKED (CP-binding) 
+37     LYS      ANK2     93         0.6640       WEAK (0.6<=Q<0.72)  
+38     PRO      ANK2     58         0.7543       STABLE              
+39     LEU      ANK2     83         0.7590       STABLE              
+40     HSD      ANK2     85         0.8000       STABLE              
+41     TYR      ANK2     95         0.7079       MASKED (CP-binding) 
+42     ALA      ANK2     91         0.6813       WEAK (0.6<=Q<0.72)  
+43     ALA      ANK2     68         0.6654       WEAK (0.6<=Q<0.72)  
+44     ASP      ANK2     94         0.6410       MASKED (CP-binding) 
+45     CYS      ANK2     71         0.6690       MASKED (CP-binding) 
+46     GLY      ANK2     81         0.7099       WEAK (0.6<=Q<0.72)  
+47     GLN      ANK2     86         0.6919       MASKED (CP-binding) 
+48     LEU      ANK2     90         0.5111       >>> UNSTABLE (Q<0.6) <<<
+49     GLU      ANK2     82         0.6646       WEAK (0.6<=Q<0.72)  
+50     ILE      ANK2     108        0.6204       WEAK (0.6<=Q<0.72)  
+51     LEU      ANK2     122        0.5451       >>> UNSTABLE (Q<0.6) <<<
+52     GLU      ANK2     89         0.6601       WEAK (0.6<=Q<0.72)  
+53     PHE      ANK2     114        0.5789       >>> UNSTABLE (Q<0.6) <<<
+54     LEU      ANK2     85         0.6794       WEAK (0.6<=Q<0.72)  
+55     LEU      ANK2     96         0.6615       WEAK (0.6<=Q<0.72)  
+56     LEU      ANK2     70         0.6821       WEAK (0.6<=Q<0.72)  
+57     LYS      ANK2     66         0.6288       WEAK (0.6<=Q<0.72)  
+58     GLY      ANK2     43         0.7267       STABLE              
+59     ALA      ANK2     52         0.7163       WEAK (0.6<=Q<0.72)  
+60     ASP      ANK2     81         0.6543       WEAK (0.6<=Q<0.72)  
+61     ILE      ANK2     81         0.6759       WEAK (0.6<=Q<0.72)  
+62     ASN      ANK2     80         0.6375       WEAK (0.6<=Q<0.72)  
+63     ALA      ANK2     68         0.7426       STABLE              
+64     PRO      ANK2     91         0.6154       WEAK (0.6<=Q<0.72)  
+65     ASP      ANK2     59         0.7076       WEAK (0.6<=Q<0.72)  
+66     LYS      ANK2     47         0.7234       MASKED (CP-binding) 
+67     HSE      ANK2     87         0.5172       MASKED (CP-binding) 
+68     HSD      ANK3     49         0.7449       STABLE              
+69     ILE      ANK3     71         0.6479       MASKED (CP-binding) 
+70     THR      ANK3     81         0.7407       STABLE              
+71     PRO      ANK3     89         0.7416       STABLE              
+72     LEU      ANK3     91         0.6731       WEAK (0.6<=Q<0.72)  
+73     LEU      ANK3     95         0.6658       WEAK (0.6<=Q<0.72)  
+74     SER      ANK3     85         0.7235       STABLE              
+75     ALA      ANK3     69         0.7464       STABLE              
+76     VAL      ANK3     96         0.6589       WEAK (0.6<=Q<0.72)  
+77     TYR      ANK3     88         0.5795       MASKED (CP-binding) 
+78     GLU      ANK3     91         0.5247       MASKED (CP-binding) 
+79     GLY      ANK3     39         0.9038       STABLE              
+80     HSD      ANK3     73         0.6575       MASKED (CP-binding) 
+81     VAL      ANK3     78         0.6122       WEAK (0.6<=Q<0.72)  
+82     SER      ANK3     60         0.6375       WEAK (0.6<=Q<0.72)  
+83     CYS      ANK3     86         0.6599       WEAK (0.6<=Q<0.72)  
+84     VAL      ANK3     87         0.7011       WEAK (0.6<=Q<0.72)  
+85     LYS      ANK3     71         0.6585       WEAK (0.6<=Q<0.72)  
+86     LEU      ANK3     83         0.6747       WEAK (0.6<=Q<0.72)  
+87     LEU      ANK3     103        0.6748       WEAK (0.6<=Q<0.72)  
+88     LEU      ANK3     81         0.6975       WEAK (0.6<=Q<0.72)  
+89     SER      ANK3     63         0.7937       STABLE              
+90     LYS      ANK3     62         0.6290       WEAK (0.6<=Q<0.72)  
+91     GLY      ANK3     50         0.6850       WEAK (0.6<=Q<0.72)  
+92     ALA      ANK3     47         0.7766       STABLE              
+93     ASP      ANK3     56         0.7902       STABLE              
+94     LYS      ANK3     70         0.7393       STABLE              
+95     THR      ANK3     58         0.8147       STABLE              
+96     VAL      ANK3     42         0.7500       STABLE              
+97     LYS      ANK3     59         0.6653       WEAK (0.6<=Q<0.72)  
+98     GLY      ANK3     40         0.7937       STABLE              
+99     PRO      ANK3     47         0.7500       MASKED (CP-binding) 
+100    ASP      ANK3     57         0.7149       MASKED (CP-binding) 
+101    GLY      ANK4     55         0.8045       STABLE              
+102    LEU      ANK4     95         0.6079       WEAK (0.6<=Q<0.72)  
+103    THR      ANK4     84         0.5655       >>> UNSTABLE (Q<0.6) <<<
+104    ALA      ANK4     72         0.6319       WEAK (0.6<=Q<0.72)  
+105    LEU      ANK4     68         0.8199       STABLE              
+106    GLU      ANK4     52         0.7885       STABLE              
+107    ALA      ANK4     64         0.6836       WEAK (0.6<=Q<0.72)  
+108    THR      ANK4     63         0.7500       STABLE              
+109    ASP      ANK4     45         0.7889       STABLE              
+110    ASN      ANK4     83         0.5633       >>> UNSTABLE (Q<0.6) <<<
+111    GLN      ANK4     46         0.9728       STABLE              
+112    ALA      ANK4     69         0.7609       STABLE              
+113    ILE      ANK4     96         0.6458       WEAK (0.6<=Q<0.72)  
+114    LYS      ANK4     100        0.7475       STABLE              
+115    ALA      ANK4     72         0.7049       WEAK (0.6<=Q<0.72)  
+116    LEU      ANK4     64         0.7422       TERMINAL            
+117    LEU      ANK4     63         0.6944       TERMINAL            
+118    GLN      ANK4     45         0.6167       TERMINAL            

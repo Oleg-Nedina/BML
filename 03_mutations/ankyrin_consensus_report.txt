@@ -1,0 +1,38 @@
+====================================================================================
+ REPORT FASE 3.1: ALLINEAMENTO CONSENSO ANKYRIN REPEATS & TARGET PER FOLDX (2MYO)
+ Riferimento: Mosavi, Minor & Peng (PNAS 2002, 99:16029-16034)
+====================================================================================
+
+1. ALLINEAMENTO DEI 4 MODULI ANKYRIN DI 2MYO CONTRO IL CONSENSO (33 POSIZIONI)
+   Legenda: [x] = Residuo nella Functional Mask (3AAA < 4.5 A, NON mutabile)
+            *   = Angolo di Ramachandran fuori regione in 2MYO.pdb (REMARK 500)
+
+Pos Repeat :   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33
+CONSENSO   :   G   X   T   P   L   H   L   A   A   X   X   G   H   L   E   I   V   E   V   L   L   K   X   G   A   D   V   N   A   X   D   X   X
+------------------------------------------------------------------------------------------------------------------------------------------------
+ANK1 (N-cap, 2-34)    :   -   -   -   C   D [K] [E]   F [M] [W] [A] [N]   G [D]   L [D] [E]   V   K   D   Y   V   -   A  *K   G  *E  *D  *V  *N   R  *T  *L
+ANK2 (Core, 35-67)    :   G [R]   K  *P   L   H [Y]   A   A [D] [C]   G [Q]  *L   E   I   L   E  *F  *L   L   L  *K   G  *A  *D   I  *N   A  *P   D [K] [H]
+ANK3 (Core, 68-100)   :  *H [I]   T   P   L   L   S   A   V [Y] [E]   G [H]  *V   S   C  *V  *K   L  *L  *L   S   K   G  *A  *D  *K   T   V  *K   G [P] [D]
+ANK4 (C-cap, 101-118) :   G   L  *T   A  *L   E   A  *T   D   N   Q   A   I   K   A   L   L   Q   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+
+====================================================================================
+2. TOP 10 HOTSPOTS STRUTTURALI & EVOLUTIVI (FUORI DALLA FUNCTIONAL MASK)
+====================================================================================
+Res    WT   Consenso   Modulo           Razionale Biofisico / Strutturale
+----------------------------------------------------------------------------------------------------
+73     L    H          ANK3 (pos 6)     Motivo firma TPLH interrotto (T70-P71-L72-L73): L73H ripristina l'Istidina canonica di consenso!
+94     K    V/I        ANK3 (pos 27)    Motivo GADVNA interrotto (G91-A92-D93-K94): Lisina carica in tasca idrofobica V/I + Ramachandran outlier!
+64     P    K/N/A      ANK2 (pos 30)    Loop GADINAPD: PRO 64 ha il peggior Ramachandran outlier di 2MYO (psi=+121.5, phi=-27.7)!
+105    L    F          ANK4 (pos 5)     Unica differenza evolutiva Ratto (LEU 105) vs Uomo (PHE 105 in 3AAA) + Ramachandran outlier!
+37     K    T          ANK2 (pos 3)     Posizione 3 del motivo TPLH occupata da LYS 37 (invece di THR consenso; G35-R36-K37-P38-L39-H40)
+68     H    G/N        ANK3 (pos 1)     Posizione 1 beta-turn (di solito GLY) occupata da HIS 68 con Ramachandran positivo anomalo
+81     V    G/H        ANK3 (pos 14)    Loop corto inter-elica in ANK3: VAL 81 ha angoli di Ramachandran anomali (psi=+4.0, phi=+38.4)
+59     A    G          ANK2 (pos 25)    Ingresso del loop GADVNA: ALA 59 e' in tensione sterica rispetto a GLY/ALA
+26     E    A          ANK1 (pos 25)    Motivo GADVNA in ANK1 (G23-K24-G25-E26-D27-V28-N29): GLU 26 ha Ramachandran outlier
+103    T    T/P        ANK4 (pos 3)     Ingresso elica C-cap ANK4 (G101-L102-T103-A104-L105): THR 103 Ramachandran outlier
+
+====================================================================================
+3. LISTA DI 43 POSIZIONI CANDIDATE PER FOLDX POSITIONSCAN (20 AA ciascuna)
+====================================================================================
+Stringa FoldX positions:
+KA24d,EA26d,DA27d,VA28d,NA29d,TA31d,LA32d,EA33d,GA35d,KA37d,PA38d,HA40d,LA48d,FA53d,LA54d,KA57d,AA59d,DA60d,NA62d,PA64d,HA68d,TA70d,PA71d,LA72d,LA73d,VA81d,VA84d,KA85d,LA87d,LA88d,GA91d,AA92d,DA93d,KA94d,TA95d,VA96d,KA97d,GA101d,TA103d,AA104d,LA105d,TA108d,NA110d

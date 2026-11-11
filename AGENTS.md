@@ -67,9 +67,14 @@ Qualsiasi assistente AI (Antigravity / LLM) e ciascun membro del team deve atten
 2. **Statistica e Incertezza:**
    - Riportare sempre **Media $\pm$ Deviazione Standard ($\mu \pm \sigma$)** calcolata tra le repliche indipendenti sulla finestra temporale equilibrata finale, verificando la significatività statistica delle differenze osservate.
 
-### D. Compatibilità Multipiattaforma (Linux + Windows), Visualizzazioni VMD e Gestione Git
-1. **📸 Regola "Momento Foto per le Slide" (Immagini VMD ad Alta Risoluzione):**
+### D. Compatibilità Multipiattaforma (Linux + Windows), Visualizzazioni, Cartella `STATUS/` e Gestione Git
+1. **📊 Regola Formato Grafici (`.pdf` Vettoriale Obbligatorio):**
+   - Tutti i grafici 2D generati in Python (`matplotlib`/`seaborn`) devono essere salvati obbligatoriamente in **formato vettoriale `.pdf`** (`format="pdf"`, non `.png`) dentro `06_presentation/`, per garantire qualità tipografica perfetta a qualsiasi livello di zoom nelle slide e nei report.
+2. **📓 Tracciamento Continuo nella Cartella `STATUS/` (`discovery.md` e `SESSION<N>.md`):**
+   - **`STATUS/discovery.md`**: Registro cumulativo di tutte le scoperte scientifiche, biofisiche e HPC emerse durante il lavoro (es. reti di H-bond delle istidine, deviazioni dal consenso Ankyrin, residui funzionali, speedup AVX-512 su core fisici vs SMT, ecc.). Va aggiornato ogni volta che emerge un risultato degno di nota per la presentazione.
+   - **`STATUS/SESSION0.md`, `SESSION1.md`, ...**: Diario dettagliato per ogni sessione di lavoro che documenta cosa è stato fatto, gli script creati/validati, i risultati ottenuti e la scaletta operativa per la sessione successiva.
+3. **📸 Regola "Momento Foto per le Slide" (Immagini VMD ad Alta Risoluzione):**
    - In ogni fase del progetto (`ROAD1.md`, `ROAD2.md`, ...) in cui si ottiene un risultato strutturale rilevante per la presentazione finale, deve essere sempre presente un box dedicato **`📸 MOMENTO FOTO PER LE SLIDE (VMD)`** (accompagnato da uno script `.tcl` di visualizzazione in `scripts/viz_*.tcl`).
    - Lo script imposta automaticamente in VMD le buone norme grafiche da pubblicazione/presentazione (`color Display Background white`, `axes location Off`, `display projection Orthographic`, `display depthcue off`, `NewCartoon` + `Licorice`) e indica all'utente come salvare l'immagine in `06_presentation/` tramite **`File -> Render -> Snapshot (o Tachyon)`**.
-2. **Percorsi Relativi:** Tutti gli script `.tcl`, `.conf` e `.py` devono utilizzare esclusivamente **percorsi relativi** con slash `/` (supportati nativamente da Tcl/VMD, NAMD e Python sia su Linux che su Windows).
-3. **Igiene del Repository Git:** Non committare mai file binari di traiettoria o checkpoint pesanti (`.dcd`, `.coor`, `.vel`, `.xsc`, `.bak`, `.old`). Committare sempre script, file di configurazione, strutture `.pdb`/`.psf` di riferimento, tabelle di output `.dat`/`.csv`/`.fxout`, figure in `06_presentation/` e documentazione in `ROADMAP/`.
+4. **Percorsi Relativi:** Tutti gli script `.tcl`, `.conf` e `.py` devono utilizzare esclusivamente **percorsi relativi** con slash `/` (supportati nativamente da Tcl/VMD, NAMD e Python sia su Linux che su Windows).
+5. **Igiene del Repository Git:** Non committare mai file binari di traiettoria o checkpoint pesanti (`.dcd`, `.coor`, `.vel`, `.xsc`, `.bak`, `.old`). Committare sempre script, file di configurazione, strutture `.pdb`/`.psf` di riferimento, tabelle di output `.dat`/`.csv`/`.fxout`, figure `.pdf` in `06_presentation/`, diario in `STATUS/` e documentazione in `ROADMAP/`.
