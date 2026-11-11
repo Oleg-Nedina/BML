@@ -1,0 +1,5 @@
+# Parametri PBC calcolati su 01_structures/2myo_wb_ionized
+cellBasisVector1    71.840    0.000    0.000
+cellBasisVector2     0.000   58.972    0.000
+cellBasisVector3     0.000    0.000   54.840
+cellOrigin          7.735   -8.087   86.003

@@ -67,6 +67,9 @@ Qualsiasi assistente AI (Antigravity / LLM) e ciascun membro del team deve atten
 2. **Statistica e Incertezza:**
    - Riportare sempre **Media $\pm$ Deviazione Standard ($\mu \pm \sigma$)** calcolata tra le repliche indipendenti sulla finestra temporale equilibrata finale, verificando la significatività statistica delle differenze osservate.
 
-### D. Compatibilità Multipiattaforma (Linux + Windows) e Gestione Git
-1. **Percorsi Relativi:** Tutti gli script `.tcl`, `.conf` e `.py` devono utilizzare esclusivamente **percorsi relativi** con slash `/` (supportati nativamente da Tcl/VMD, NAMD e Python sia su Linux che su Windows).
-2. **Igiene del Repository Git:** Non committare mai file binari di traiettoria o checkpoint pesanti (`.dcd`, `.coor`, `.vel`, `.xsc`, `.bak`, `.old`). Committare sempre script, file di configurazione, strutture `.pdb`/`.psf` di riferimento, tabelle di output `.dat`/`.csv`/`.fxout` e documentazione in `ROADMAP/`.
+### D. Compatibilità Multipiattaforma (Linux + Windows), Visualizzazioni VMD e Gestione Git
+1. **📸 Regola "Momento Foto per le Slide" (Immagini VMD ad Alta Risoluzione):**
+   - In ogni fase del progetto (`ROAD1.md`, `ROAD2.md`, ...) in cui si ottiene un risultato strutturale rilevante per la presentazione finale, deve essere sempre presente un box dedicato **`📸 MOMENTO FOTO PER LE SLIDE (VMD)`** (accompagnato da uno script `.tcl` di visualizzazione in `scripts/viz_*.tcl`).
+   - Lo script imposta automaticamente in VMD le buone norme grafiche da pubblicazione/presentazione (`color Display Background white`, `axes location Off`, `display projection Orthographic`, `display depthcue off`, `NewCartoon` + `Licorice`) e indica all'utente come salvare l'immagine in `06_presentation/` tramite **`File -> Render -> Snapshot (o Tachyon)`**.
+2. **Percorsi Relativi:** Tutti gli script `.tcl`, `.conf` e `.py` devono utilizzare esclusivamente **percorsi relativi** con slash `/` (supportati nativamente da Tcl/VMD, NAMD e Python sia su Linux che su Windows).
+3. **Igiene del Repository Git:** Non committare mai file binari di traiettoria o checkpoint pesanti (`.dcd`, `.coor`, `.vel`, `.xsc`, `.bak`, `.old`). Committare sempre script, file di configurazione, strutture `.pdb`/`.psf` di riferimento, tabelle di output `.dat`/`.csv`/`.fxout`, figure in `06_presentation/` e documentazione in `ROADMAP/`.

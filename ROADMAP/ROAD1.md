@@ -238,14 +238,51 @@ Seguendo [`Lecture03`](file:///home/olly/UNI/BioMolEng2026/Lectures-20261014/Lec
 - Usiamo il pacchetto `autoionize` di VMD per neutralizzare la carica netta della Myotrophin e portare la concentrazione salina a **$0.15\text{ M NaCl}$** (`-sc 0.15`, forza ionica fisiologica).
 - Infine, misuriamo con `measure minmax` e `measure center` le dimensioni esatte della scatola (`cellBasisVector1`, `cellBasisVector2`, `cellBasisVector3` e `cellOrigin`) da inserire nel file `.conf` di NAMD della Fase 2!
 
-*(Aspettiamo prima l'output dei vostri Comandi 1.2 e 1.4 qui sopra, così fissiamo insieme con certezza matematica lo stato delle 4 istidine prima di lanciare lo script dei Passi 1.5 e 1.6!)*
+*(Risultati verificati dai Comandi 1.2 e 1.4: zero ponti disolfuro sulle 3 Cisteine `CYS 2, 45, 83`; tautomeri assegnati: `HIS 40 -> HSD`, `HIS 67 -> HSE`, `HIS 68 -> HSD`, `HIS 80 -> HSD`; RMSD `2MYO` vs `3AAA` = `2.365 Å`; Functional Mask di 24 residui: `resid 4 5 7 8 9 11 12 14 16 17 34 36 41 44 45 47 66 67 69 77 78 80 99 100`).*
+
+### 💻 Comando 1.5 & 1.6 (Costruzione Topologia `CHARMM36m`, Solvatazione `TIP3P` e Ionizzazione `0.15 M NaCl`)
+
+Dalla cartella principale `BML/`, eseguite lo script [`scripts/02_build_wt_charmm36m.tcl`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/scripts/02_build_wt_charmm36m.tcl):
+
+```bash
+vmd -dispdev text -e scripts/02_build_wt_charmm36m.tcl
+```
+
+---
+
+## 📸 MOMENTO FOTO PER LE SLIDE (Fase 1 — Da salvare in `06_presentation/`)
+
+Dalla Fase 1 potete già ricavare **3 immagini spettacolari** per le **Slide 2 e Slide 3** della presentazione finale!  
+Ho preparato uno script automatico ([`scripts/viz_01_structure_and_mask.tcl`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/scripts/viz_01_structure_and_mask.tcl)) che imposta in VMD lo sfondo bianco da articolo scientifico, toglie gli assi, applica l'ombreggiatura *Ambient Occlusion* e colora automaticamente tutti gli elementi:
+
+### Come aprire la scena grafica pronta per gli screenshot:
+```bash
+vmd -e scripts/viz_01_structure_and_mask.tcl
+```
+
+Una volta aperta la finestra di VMD, andate su **`Graphics -> Representations`** (cliccando due volte su una riga nella lista potete accenderla/spegnerla in un attimo!) e salvate queste **3 figure** (usando **`File -> Render -> Snapshot`** oppure semplicemente uno screenshot ritagliato, salvandole in `06_presentation/`):
+
+1. **Figura 1 (`06_presentation/fig1_ankyrin_repeats_and_mask.png`) — *Per la Slide 2 (Introduzione a `2MYO`)*:**
+   - **Cosa lasciare acceso in `Representations`:** I 4 Ankyrin Repeats (`ANK1` Blu, `ANK2` Ciano, `ANK3` Arancione, `ANK4` Verde) + la Triade Funzionale (`TRP 8, ASP 44, GLU 78` in bastoncini rossi) + opzionalmente fate doppio click sulla riga `Surf` (Rappresentazione 5) per mostrare in rosso semitrasparente tutta la faccia concava dei 24 residui della *Functional Mask* che legano l'Actin-Capping Protein!
+   - **Inquadratura:** Ruotate la proteina con il mouse (tasto sinistro) in modo che si vedano chiaramente le 4 "spire" del solenoide e i loop che sporgono da un lato.
+2. **Figura 2 (`06_presentation/fig2_histidine_hbond_network.png`) — *Per la Slide 3 (Rigore nel Setup: Tautomeri `HIS 40` e `HIS 67`)*:**
+   - **Cosa lasciare acceso:** I repeat centrali (`ANK1`, `ANK2`, `ANK3`) e l'ultima rappresentazione (`resid 35 37 40 67 74` in `Licorice`).
+   - **Trucco VMD per disegnare i trattini delle "calamite" (H-bonds) e le distanze in Å sullo schermo:**
+     - Premete il tasto **`2`** sulla tastiera (attiva lo strumento *Bond/Distance Measure* del mouse) e cliccate prima sull'azoto `ND1` di `HIS 40` e poi sull'ossigeno `OG` di `SER 74` $\rightarrow$ comparirà la linea tratteggiata con scritto **`2.44`**!
+     - Poi cliccate su `NZ` di `LYS 37` e `ND1` di `HIS 67` (**`3.24`**) e su `NE2` di `HIS 67` e `O` di `GLY 35` (**`2.40`**)! *(Per tornare a ruotare normalmente col mouse basta premere il tasto **`r`** sulla tastiera).*
+3. **Figura 3 (`06_presentation/fig3_solvated_box.png`) — *Per la Slide 3 (Dominio di Simulazione PBC)*:**
+   - Dopo aver lanciato `scripts/02_build_wt_charmm36m.tcl`, potete aprire la scatola d'acqua con:
+     ```bash
+     vmd 01_structures/2myo_wb_ionized.psf 01_structures/2myo_wb_ionized.pdb
+     ```
+   - Impostando `protein` in `NewCartoon`, `ions` (`resname SOD CLA`) in `VDW` (sfere) e `water` in `Lines` (o `QuickSurf` trasparente) e scrivendo nella Tk Console `pbc box` per disegnare il cubo del dominio periodico!
 
 ---
 
 ## ✅ Checklist di Controllo della Fase 1 (`ROAD1`)
 
 Prima di passare a `ROAD2.md` (Benchmark NAMD e Simulazione WT 300 K vs 400 K), verificheremo insieme di avere:
-- [ ] Eseguito il **Comando 1.2** e annotato le distanze delle 3 Cisteine (`CYS 2, 45, 83`) e i legami a idrogeno/protonazione delle 4 Istidine (`HIS 40, 67, 68, 80`).
-- [ ] Eseguito il **Comando 1.4** e annotato l'RMSD tra `2MYO` e `3AAA` e la lista esatta dei residui della **Functional Mask**.
-- [ ] Generato `01_structures/2myo_wt.psf` e `01_structures/2myo_wt.pdb` (con `psfgen` e `CHARMM36m` senza warning o atomi con coordinate `(0, 0, 0)`).
-- [ ] Generato `01_structures/2myo_wb_ionized.psf` e `01_structures/2myo_wb_ionized.pdb` e salvato i parametri `cellBasisVector` e `cellOrigin`.
+- [x] Eseguito il **Comando 1.2** e annotato le distanze delle 3 Cisteine (`CYS 2, 45, 83`) e i legami a idrogeno/protonazione delle 4 Istidine (`HIS 40 -> HSD, HIS 67 -> HSE, HIS 68 -> HSD, HIS 80 -> HSD`).
+- [x] Eseguito il **Comando 1.4** e annotato l'RMSD tra `2MYO` e `3AAA` (`2.365 Å`) e la lista esatta dei 24 residui della **Functional Mask**.
+- [ ] Generato `01_structures/2myo_wt.psf` e `01_structures/2myo_wt.pdb` e il sistema solvatato/ionizzato `01_structures/2myo_wb_ionized.psf` e `.pdb` lanciando `vmd -dispdev text -e scripts/02_build_wt_charmm36m.tcl`.
+- [ ] Salvato le prime figure da VMD in `06_presentation/` con `vmd -e scripts/viz_01_structure_and_mask.tcl`.
