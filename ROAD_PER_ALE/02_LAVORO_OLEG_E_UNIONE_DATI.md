@@ -27,11 +27,13 @@ Mentre Alessia esegue lo screening con i predittori Cloud/AI/Rosetta ([`01_GUIDA
      - $\Delta E_{\text{HBond}}$ (nuovi legami a idrogeno intramolecolari).
 
 ### C. Fase 2 — Simulazione MD Notturna del Wild-Type a `300 K` e `400 K` (`02_wt_baseline/`) [🌙 Gira Stanotte (~7.5 ore)]
-Perché simuliamo il Wild-Type in acqua stanotte con `run_overnight_wt.sh`?
-- **Run 1 — Controllo a `300 K` ($27^\circ\text{C}$, `1.5 ns`):** verifica che a temperatura ambiente la proteina nativa sia stabile ($\text{RMSD} < 2\text{ Å}$, frazione di contatti nativi $Q \approx 0.90$).
-- **Run 2 — Stress Termico a `400 K` ($127^\circ\text{C}$, `2.5 ns`, protocollo *Bekker, Ma & Kamiya 2019*):** l'alta temperatura accelera i moti termici e fa emergere i **"bulloni deboli" della proteina**, cioè:
-  1. Quale dei 4 Ankyrin Repeats (`ANK1`, `ANK2`, `ANK3`, `ANK4`) perde più contatti nativi $Q(t)$ ad alta temperatura;
-  2. Quali singoli residui $i$ hanno una **frazione media di contatti nativi bassa ($\langle Q_i \rangle_{400\text{K}} < 0.60$ o $< 0.72$)** e un **alto RMSF** (fluttuazione termica).
+A cosa serve **questa** simulazione NAMD del Wild-Type (diversa da quella finale della Fase 4)?
+- **In Fase 2 (stanotte) serve a GUIDARE la scelta delle posizioni da mutare** (*Bekker, Ma & Kamiya 2019*): NAMD non propone le mutazioni chimiche, ma ci rivela **dove la proteina nativa cede davvero al calore** in acqua esplicita e ioni:
+  - **Run 1 — Controllo a `300 K` ($27^\circ\text{C}$, `1.5 ns`):** verifica che a temperatura ambiente la proteina nativa sia stabile ($\text{RMSD} < 2\text{ Å}$, frazione di contatti nativi $Q \approx 0.90$).
+  - **Run 2 — Stress Termico a `400 K` ($127^\circ\text{C}$, `2.5 ns`):** accelera i moti termici e fa emergere i **"bulloni deboli" dinamici**:
+    1. Quale dei 4 Ankyrin Repeats (`ANK1`, `ANK2`, `ANK3`, `ANK4`) perde più contatti nativi $Q(t)$ ad alta temperatura;
+    2. Quali singoli residui $i$ hanno una **frazione media di contatti nativi bassa ($\langle Q_i \rangle_{400\text{K}} < 0.60$ o $< 0.72$)** e un **alto RMSF** (fluttuazione termica).
+- *(Poi in **Fase 4**, dopo aver scelto le mutazioni con **FireProt 2.0, ThermoMPNN-D, DynaMut2, FoldX e questi dati MD WT**, NAMD servirà a **TESTARE i mutanti** e dimostrare statisticamente su 3 repliche che trattengono più contatti nativi del Wild-Type!)*
 - Al termine della notte, lo script genera in automatico il report definitivo **`02_wt_baseline/unstable_residues_report.txt`** e i grafici vettoriali `fig5_wt_baseline_plots.pdf` e `fig5b_wt_analysisMD_observables.pdf`.
 
 ---
@@ -64,7 +66,8 @@ Per ogni possibile mutazione fuori dalla Functional Mask:
 2. **Oleg (FoldX + Consenso Ankyrin)** ci dice: *"Mutando questo residuo (es. `T108L`, `A59G`, `V81L`, `T103F`, `H68G`, `P64V`, `K37L`), FoldX prevede un forte guadagno di stabilità ($\Delta\Delta G_{\text{FoldX}} < -1.5\text{ kcal/mol}$) grazie a un meccanismo fisico preciso (miglior impaccamento idrofobico $\Delta E_{\text{VdW+SolvH}}$ o rilascio di clash torsionale $\Delta E_{\text{Clash}}$)"*.
 3. **Alessia (FireProt/Rosetta + ThermoMPNN-D + DynaMut2)** ci dà il **verdetto di validazione incrociata**:
    - Elimina i "falsi positivi" di FoldX (se una mutazione piace a FoldX ma viene bocciata sia da Rosetta/FireProt, sia dalla rete neurale ThermoMPNN-D, sia da DynaMut2, la scartiamo!).
-   - Promuove come **vincitrici assolute (`Mut1` e `Mut2`)** le due mutazioni (in siti/repeat complementari, così non si ostacolano a vicenda nel Doppio Mutante `Mut1 + Mut2`) che sono **confermate come stabilizzanti da tutti i metodi contemporaneamente**!
+   - Promuove come **vincitrici** le mutazioni complementari in siti/repeat distinti confermate contemporaneamente da **FireProt 2.0 (Rosetta + MSA)**, **ThermoMPNN-D**, **DynaMut2**, **FoldX** e **MD WT `400 K`**.
+   - **Quante varianti portiamo in MD finale?** Il bando ufficiale (`Laboratory_Project_2026.pdf`, Slide 13, 19, 21) non fissa un numero rigido: chiede di selezionare varianti singole/combinate compatibili col **budget computazionale** (~`4.7 ore` a replica `400 K` $\times$ 3 repliche $\approx$ `14 ore` per variante). Il nostro schema base prevede **2 singole (`Mut1`, `Mut2`) + 1 combinata (`Double = Mut1+Mut2`)** (~`56 ore` totali incluso `WT`), ma se **FireProt 2.0** o **ThermoMPNN-D** faranno emergere un **3° sito irrinunciabile o un multi-mutante combinato**, possiamo aggiungerlo senza problemi!
 
 ---
 
@@ -77,9 +80,9 @@ Appena domani mattina avremo unito i `.csv` di Alessia con i risultati MD di Ole
    python3 scripts/06_build_consensus_matrix.py
    cat 03_mutations/consensus_master_table.txt
    ```
-   Sceglieremo insieme **`Mut1`**, **`Mut2`** e il **Doppio Mutante (`Double = Mut1 + Mut2`)**.
-2. **Passo 2 (2 minuti) — Costruzione 3D dei 3 Mutanti con `FoldX BuildModel`:**
-   - Scriveremo i 3 mutanti in `03_mutations/individual_list.txt` e lanceremo `FoldX BuildModel` per generare i file `.pdb` 3D dei 3 mutanti (`Mut1`, `Mut2`, `Double`) e fare gli zoom 3D in VMD (*Prima vs Dopo* la mutazione).
-   - *(Alessia potrà anche testare la riga del Doppio Mutante `Mut1;Mut2` nella sezione `Multiple Mutations` di DynaMut2 e verificare il punteggio epistatico in `thermompnn_double_2MYO.csv`!).*
+   Valuteremo insieme i punteggi incrociati (**MD + FoldX + FireProt 2.0 + ThermoMPNN-D + DynaMut2**) e decideremo le varianti finali (`Mut1`, `Mut2`, `Double`, ed eventuale variante extra di FireProt).
+2. **Passo 2 (2 minuti) — Costruzione 3D delle Varianti Scelte con `FoldX BuildModel`:**
+   - Scriveremo i mutanti scelti in `03_mutations/individual_list.txt` e lanceremo `FoldX BuildModel` per generare i file `.pdb` 3D dei mutanti e fare gli zoom 3D in VMD (*Prima vs Dopo* la mutazione).
+   - *(Alessia potrà anche testare la riga del Doppio/Multi-Mutante nella sezione `Multiple Mutations` di DynaMut2 e verificare il punteggio epistatico in `thermompnn_double_2MYO.csv`!).*
 3. **Passo 3 (Fase 4) — Simulazioni MD Comparative a `400 K` (*Matched Comparison*):**
    - Solvateremo `Mut1`, `Mut2` e `Double` con la stessa identica scatola d'acqua del Wild-Type e lanceremo le **3 repliche indipendenti (`seed` diversi) a `400 K`** per dimostrare con **Media $\pm$ Deviazione Standard** che i mutanti progettati da Oleg e Alessia mantengono un $Q$-value più alto e un RMSD/RMSF più basso rispetto al Wild-Type!

@@ -9,14 +9,12 @@
 ## 🎯 1. Cosa Stiamo Cercando e Perché il Tuo Lavoro è Fondamentale
 
 ### L'obiettivo del progetto in 3 righe
-Vogliamo ingegnerizzare la **Myotrophin (`2MYO`)** per renderla **più termostabile** (cioè capace di resistere ad alte temperature senza perdere la propria struttura 3D, $\Delta\Delta G < 0$) individuando:
-- **2 mutazioni singole indipendenti (`Mut1` e `Mut2`)**
-- **1 doppio mutante combinato (`Double = Mut1 + Mut2`)**
+Vogliamo ingegnerizzare la **Myotrophin (`2MYO`)** per renderla **più termostabile** (cioè capace di resistere ad alte temperature senza perdere la propria struttura 3D, $\Delta\Delta G < 0$), selezionando un pannello ristretto e ben motivato di varianti da verificare poi in Dinamica Molecolare (MD) — ad esempio **2–3 mutazioni singole complementari (`Mut1`, `Mut2`, ...) più 1 mutante combinato (`Double` o multi-mutante suggerito da FireProt 2.0)**, calibrando il numero finale sia sul **budget computazionale di NAMD** (`Laboratory_Project_2026.pdf`, Slide 21: ~14 ore per ogni variante con 3 repliche a `400 K`) sia su quanti candidati solidi emergono dal consenso **FireProt 2.0 + ThermoMPNN-D + DynaMut2 + FoldX + MD WT**.
 
 ### Perché non ci basta FoldX da solo (e perché entra in gioco la tua parte)?
 Oleg sta facendo girare sul suo PC:
-1. La **Dinamica Molecolare (MD) a `300 K` e `400 K`** per vedere quali amminoacidi del Wild-Type si "sbottonano" davvero quando l'acqua bolle;
-2. Lo **screening energetico locale con FoldX 5** su tutte le posizioni modificabili della proteina.
+1. La **Dinamica Molecolare (MD) del Wild-Type a `300 K` e `400 K` con NAMD 3** per individuare *quali zone* della proteina perdono contatti nativi quando sale la temperatura (guida fisica per scegliere dove mutare, seguita poi in Fase 4 dalle MD sui mutanti per testarne l'efficacia reale);
+2. Lo **screening energetico locale con FoldX 5** su tutte le `88/88` posizioni modificabili della proteina.
 
 Tuttavia, **FoldX da solo ha un limite noto** (`Lecture05` del Prof. Gautieri): tiene lo scheletro (*backbone*) della proteina quasi fermo e usa una funzione empirica che a volte produce "falsi positivi" (ad esempio premia amminoacidi troppo grossi o rigidi che poi in acqua calda rompono il fold).  
 Per fare un vero **lavoro di ricerca** (e avere una parte solida e autonoma da raccontare nelle tue slide il 16 Dicembre!), affianchiamo a FoldX **3 predittori ortogonali sul Cloud** che usi tu dal browser (**0 installazioni sul tuo PC!**):
