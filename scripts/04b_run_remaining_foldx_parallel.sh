@@ -54,18 +54,18 @@ for idx, chunk in enumerate(chunks, 1):
     codes = [f"{SEQ_2MYO[r-1]}A{r}d" for r in chunk]
     with open(os.path.join(wdir, "scan.cfg"), "w") as f:
         f.write("command=PositionScan\n")
-        f.write(f"pdb-dir={wdir}\n")
-        f.write(f"output-dir={wdir}\n")
+        f.write("pdb-dir=.\n")
+        f.write("output-dir=.\n")
         f.write("pdb=2MYO_Repair.pdb\n")
         f.write("positions=" + ",".join(codes) + "\n")
     print(f"  Worker {idx}: {len(chunk)} posizioni ({','.join(codes)})")
 EOF
 
-# 3. Lancia gli 8 processi FoldX in parallelo
-echo " -> Esecuzione in parallelo su 8 core (~3-4 minuti)..."
+# 3. Lancia gli 8 processi FoldX isolati dentro le rispettive worker_* (~3-10 minuti)
+echo " -> Esecuzione in parallelo su 8 core..."
 pids=()
 for i in {1..8}; do
-    foldx -f 03_mutations/worker_${i}/scan.cfg > 03_mutations/worker_${i}/scan.log 2>&1 &
+    (cd "03_mutations/worker_${i}" && foldx -f scan.cfg > scan.log 2>&1) &
     pids+=($!)
 done
 

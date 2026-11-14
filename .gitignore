@@ -6,12 +6,15 @@
 # Versionate su Git solo script (.tcl, .py, .sh), configurazioni (.conf, .cfg),
 # strutture iniziali/riparate (.pdb), e risultati tabulari/grafici (.dat, .txt, .fxout).
 
-# --- Traiettorie e binari NAMD pesanti ---
+# --- Traiettorie, restart e binari NAMD pesanti ---
 *.dcd
 *.trr
 *.xtc
 *.coor
 *.vel
+*.xsc
+*.xst
+*.restart.*
 *.BAK
 *.old
 FFTW_*.txt
@@ -19,11 +22,16 @@ FFTW_*.txt
 # --- Log di simulazione molto grandi (opzionale: forzate con git add -f se piccoli) ---
 *.log
 
-# --- File temporanei di VMD e FoldX ---
+# --- File temporanei di VMD, FoldX e figure raster obsolete ---
 *.vmd.t/
 *.tga
 rotabase.txt
 Unrecognized_molecules.txt
+[A-Z][A-Z][A-Z][0-9]*_2MYO_Repair.pdb
+03_mutations/worker_*/
+/energies_*_2MYO_Repair.txt
+06_presentation/*.png
+/os
 /tmp/*
 
 # --- OS & Editor files ---
