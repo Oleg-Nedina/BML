@@ -84,18 +84,26 @@ if scan_path:
             except ValueError:
                 continue
 
-            # Parsing di tag tipo "LEUA73HIS" o "LA73H"
-            m3 = re.match(r"^([A-Z0-9]{3})([A-Z])(\d+)([A-Z0-9]{3})$", tag)
-            m1 = re.match(r"^([A-Z])([A-Z])(\d+)([A-Z])$", tag)
-            if m3:
-                wt3, chain, resnum, mut3 = m3.groups()
-                wt1 = THREE_TO_ONE.get(wt3, "?")
-                mut1 = THREE_TO_ONE.get(mut3, "?")
-                res_id = int(resnum)
-            elif m1:
-                wt1, chain, resnum, mut1 = m1.groups()
-                res_id = int(resnum)
+            # Parsing del tag di FoldX (es. "LYSA24G", "LEUA73HIS", "LA73H")
+            m = re.match(r"^([A-Za-z0-9]{3}|[A-Za-z])([A-Za-z])(\d+)([A-Za-z0-9]+)$", tag)
+            if not m:
+                continue
+            wt_raw, chain, resnum, mut_raw = m.groups()
+            res_id = int(resnum)
+
+            # Converti WT in 1 lettera
+            if len(wt_raw) == 3:
+                wt1 = THREE_TO_ONE.get(wt_raw.upper(), "?")
             else:
+                wt1 = wt_raw.upper()
+
+            # Converti Mut in 1 lettera (accetta solo i 20 amminoacidi canonici maiuscoli)
+            if len(mut_raw) == 3:
+                mut1 = THREE_TO_ONE.get(mut_raw.upper(), "?")
+            elif len(mut_raw) == 1 and mut_raw.isupper():
+                mut1 = mut_raw
+            else:
+                # Residui modificati / fosforilati (es. minuscole come y, z, p, s)
                 continue
 
             if wt1 == mut1 or mut1 == "?":
@@ -106,9 +114,13 @@ if scan_path:
             foldx_code = f"{wt1}{chain}{res_id}{mut1}"
             mutations.append((ddg, res_id, wt1, mut1, foldx_code))
 
-if not mutations:
+if not scan_path:
     print("ATTENZIONE: Nessun file PS_2MYO_Repair_scanning_output.txt trovato in 03_mutations/.")
     print("Assicurati di aver prima eseguito: foldx -f 03_mutations/position_scan_hotspots.cfg")
+    raise SystemExit(0)
+
+if not mutations:
+    print("ATTENZIONE: Nessuna mutazione valida estratta dal file scanning_output.")
     raise SystemExit(0)
 
 mutations.sort(key=lambda x: x[0])

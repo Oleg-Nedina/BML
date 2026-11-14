@@ -2,7 +2,8 @@
 
 **Data:** 11 Novembre 2026  
 **Partecipanti:** Oleg Nedina & Alessia Rigoni (Team #10)  
-**Stato Avanzamento:** ✅ **Punto 0 Completato** | ✅ **Fase 1 (`ROAD1.md`) Completata al 100%** | 🔄 **Fase 2 (`ROAD2.md`) Validata e Pronta per il Run Notturno** | 🚀 **Fase 3 (`ROAD3.md`) Impostata e Avviata in Anticipo!**
+**Stato Avanzamento:** ✅ **Punto 0 Completato** | ✅ **Fase 1 (`ROAD1.md`) Completata al 100%** | 🔄 **Fase 2 (`ROAD2.md`) Validata e Pronta per il Run Notturno** | 🚀 **Fase 3 (`ROAD3.md`) Impostata e Avviata in Anticipo!**  
+**Scaletta Master e Punto della Situazione:** Vedi [`SCALETTA.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/SCALETTA.md) per l'ordine logico completo `STEP 1` $\rightarrow$ `STEP 10`, la distinzione tra test e run vera e le azioni rapide di preparazione.
 
 ---
 

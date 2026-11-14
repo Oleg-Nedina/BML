@@ -139,3 +139,61 @@ Questo documento spiega in modo semplice e operativo **come lanciare ogni script
        - **Blu scuro** = Pezzi rimasti super-stabili ($\langle Q_i \rangle \approx 0.90\text{--}1.00$).
        - **Bianco/Rosa** = Pezzi mediamente flessibili ($\langle Q_i \rangle \approx 0.65\text{--}0.75$).
        - **Rosso acceso (con le catene laterali disegnate a bastoncino)** = I **"bulloni instabili" ($\langle Q_i \rangle < 0.65$)** che hanno ceduto al calore e che andremo a rinforzare con le mutazioni nella Fase 3!
+
+---
+
+### 8. `02_wt_baseline/run_overnight_wt.sh` — 🌙 Batch Notturno Automatico (Fase 2 Completa)
+- **Come si lancia (in background resistente alla chiusura del terminale):**
+  ```bash
+  nohup bash 02_wt_baseline/run_overnight_wt.sh 8 > 02_wt_baseline/overnight_master.log 2>&1 &
+  ```
+- **Cosa fa:** Esegue in sequenza automatica:
+  1. `namd3 +p8 02_wt_baseline/wt_300K.conf` (Controllo fisiologico a $300\text{ K}$)
+  2. `namd3 +p8 02_wt_baseline/wt_400K.conf` (Stress termico a $400\text{ K}$)
+  3. `vmd -dispdev text -e scripts/03_analyze_wt_baseline.tcl` (Analisi completa `analysisMD.tcl` + $Q$-value)
+  4. `python3 scripts/plot_wt_baseline.py` (Generazione dei due PDF vettoriali definitivi in `06_presentation/`)
+- **Cosa aspettarsi come output:** Tutti i file `.dcd`, `.log`, `.dat`, `unstable_residues_report.txt` e i due PDF `fig5_wt_baseline_plots.pdf` e `fig5b_wt_analysisMD_observables.pdf` pronti al mattino!
+
+---
+
+### 9. `scripts/04_ankyrin_consensus_and_targets.py` — 🧬 Allineamento Consenso Ankyrin & Preparazione Target FoldX (Fase 3.1)
+- **Come si lancia:**
+  ```bash
+  python3 scripts/04_ankyrin_consensus_and_targets.py
+  ```
+- **Cosa fa:**
+  1. Allinea i 4 moduli Ankyrin Repeat di `2MYO` (`ANK1`, `ANK2`, `ANK3`, `ANK4`) contro la sequenza consenso universale di 33 residui degli Ankyrin Repeats termostabili (*Mosavi et al., PNAS 2002*).
+  2. Incrocia le posizioni con la **Functional Mask** (24 residui intoccabili da `3AAA`) e con gli outlier torsionali di Ramachandran (`REMARK 500` di `2MYO.pdb`).
+  3. Genera automaticamente il file di configurazione per FoldX `PositionScan` sulle 35 posizioni candidate dello scaffold.
+- **Cosa aspettarsi come output (Numerico + Visivo PDF):**
+  - **`03_mutations/ankyrin_consensus_report.txt`**: Tabella di allineamento testuale dei 4 repeat con i 10 Hotspot principali (`LEU 73 -> H`, `LYS 94 -> V/I`, `PRO 64`, `LEU 105 -> F`, ecc.).
+  - **`03_mutations/position_scan_hotspots.cfg`**: File di configurazione pronto per FoldX (`35 posizioni × 20 aa = 700 mutazioni`).
+  - **`06_presentation/fig6_ankyrin_consensus_alignment.pdf`** *(Output Visivo 2D)*: Matrice grafica vettoriale a colori dei 4 Ankyrin Repeats allineati al consenso (Verde = già consenso; Giallo/Oro = Hotspot candidato; Rosso = Functional Mask vietata), pronta per la **Slide 5**!
+
+---
+
+### 10. `03_mutations/repair.cfg` & `03_mutations/position_scan_hotspots.cfg` — 🔧 Esecuzione di FoldX 5 (`RepairPDB` e `PositionScan`, Fase 3.2 & 3.3)
+- **Come si lanciano:**
+  ```bash
+  # 1. Riparazione delle catene laterali NMR (~60 secondi)
+  cp 01_structures/raw/2MYO.pdb 03_mutations/2MYO.pdb
+  foldx -f 03_mutations/repair.cfg > 03_mutations/repair.log
+
+  # 2. Scansione sistematica dei 20 amminoacidi sulle 35 posizioni candidate (~5-8 minuti)
+  foldx -f 03_mutations/position_scan_hotspots.cfg > 03_mutations/position_scan.log
+  ```
+- **Cosa aspettarsi come output:**
+  - `03_mutations/2MYO_Repair.pdb` e `2MYO_Repair.fxout`: la struttura Wild-Type rilassata nel campo di forza di FoldX.
+  - `03_mutations/PS_2MYO_Repair_scanning_output.txt`: l'elenco grezzo delle variazioni di energia libera $\Delta\Delta G_{\text{FoldX}}$ per le mutazioni testate.
+
+---
+
+### 11. `scripts/05_parse_foldx_screening.py` — 📊 Classifica Energetica FoldX + Incrocio con $\langle Q_i \rangle$ e Consenso (Fase 3.3)
+- **Come si lancia (dopo che `PositionScan` ha finito):**
+  ```bash
+  python3 scripts/05_parse_foldx_screening.py
+  ```
+- **Cosa fa:** Legge `PS_2MYO_Repair_scanning_output.txt`, scarta le auto-mutazioni ($\text{WT} \rightarrow \text{WT}$) e qualsiasi residuo della Functional Mask, incrocia ogni mutazione con il valore $\langle Q_i \rangle_{400\text{K}}$ della MD e con i target del Consenso Ankyrin, e ordina tutte le mutazioni dalla più stabilizzante ($\Delta\Delta G$ più negativo) alla meno stabilizzante.
+- **Cosa aspettarsi come output (Numerico + Visivo PDF):**
+  - **`03_mutations/foldx_top_mutations.txt`**: Tabella ordinata delle Top 40 mutazioni stabilizzanti con codice FoldX (es. `KA94V`, `LA73H`), modulo Ankyrin, $\Delta\Delta G_{\text{FoldX}}$, $\langle Q_i \rangle_{400\text{K}}$ e stella `★ CONSENSO ANKYRIN` quando la mutazione ripristina anche il consenso evolutivo!
+  - **`06_presentation/fig7_foldx_position_scan_heatmap.pdf`** *(Output Visivo 2D)*: Grafico a barre orizzontali vettoriale delle **Top 20 mutazioni termostabilizzanti** ($\Delta\Delta G < 0\text{ kcal/mol}$) colorate per Ankyrin Repeat e per convergenza col consenso (Verde), pronto per la **Slide 5 / 6**!
