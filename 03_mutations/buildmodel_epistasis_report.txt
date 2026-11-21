@@ -1,0 +1,43 @@
+========================================================================================================================================================
+ REPORT LIVELLO 1 (PUNTO 3 SCALETTA PROF — SLIDE 19): FOLDX 5 BUILDMODEL (n=5 RUNS CON MATCHED WT REFERENCES) & ANALISI DI EPISTASI
+========================================================================================================================================================
+
+1. RISULTATI ENERGETICI BUILDMODEL (MEDIA ± SD SU 5 RUN INDIPENDENTI CONTRO MATCHED WT_2MYO_Repair_*.pdb)
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+ID   Variante          Tipo     ddG_Mean ± SD      ddG_Best   d(VdW+SolvH)   dHBond     dClash     dEntropy   Razionale & Modulo
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1    K37L              Single   -2.438 ± 0.870     -3.324     -0.440         +0.621     +0.030     -1.065     ANK2 (Ingresso TPLH, 5/5 Pilastri, <Q_37>=0.485)
+2    T103L             Single   -1.150 ± 0.143     -1.250     -4.027         +0.350     +1.118     +1.375     ANK4 (C-cap Core Consenso TPLH, 5/5 Pilastri, <Q_103>=0.508)
+3    H68G              Single   -1.730 ± 0.009     -1.747     +0.555         +0.000     -0.598     -1.348     ANK3 (Beta-Turn pos 1, #1 FireProt BTC, <Q_68>=0.714)
+4    D93G              Single   -1.616 ± 0.055     -1.674     +1.097         +0.765     -1.048     -1.926     ANK3 (Loop GADKTV, 4/5 Pilastri FireProt HighC, <Q_93>=0.543)
+5    T103F             Single   -1.976 ± 0.319     -2.355     -4.589         +0.325     +1.202     +1.467     ANK4 (C-cap Core Aromatico, 4/5 Pilastri, <Q_103>=0.508)
+6    A59G              Single   -2.555 ± 0.000     -2.555     +0.526         +0.000     -1.722     -1.200     ANK2 (Ingresso Loop GADVNA Consenso, <Q_59>=0.640)
+7    D60L              Single   -0.430 ± 1.743     -3.249     -3.446         +2.104     +1.597     +0.182     ANK2 (Loop GADVNA Rilascio Tensione, <Q_60>=0.465)
+8    K37L+T103L        Double   -3.652 ± 0.656     -4.766     -3.804         +1.576     +0.418     -0.272     Doppio A: ANK2 + ANK4 (5/5 + 5/5 Pilastri, Poli Opposti)
+9    K37L+H68G         Double   -2.889 ± 0.076     -2.982     +0.001         +0.543     -0.812     -1.810     Doppio B: ANK2 + ANK3 (5/5 + #1 FireProt BTC)
+10   H68G+T103L        Double   -2.888 ± 0.418     -3.592     -2.987         -0.258     +0.688     -0.117     Doppio C: ANK3 + ANK4 (#1 FireProt BTC + 5/5 Pilastri)
+11   K37L+D93G         Double   -3.789 ± 0.858     -4.706     +1.487         +1.527     -0.800     -3.530     Doppio D: ANK2 + ANK3 (5/5 + FireProt HighCombined)
+12   A59G+D60L         Double   -3.548 ± 0.676     -4.236     -3.108         +1.602     +0.192     -0.478     Doppio E: ANK2 Locale Sinergico (ThermoMPNN-D Epistatico)
+13   K37L+H68G+T103L   Triple   -5.032 ± 0.210     -5.392     -2.968         +1.418     -0.206     -1.596     Triplo Consenso: ANK2 + ANK3 + ANK4 (1 Bullone per Repeat)
+
+========================================================================================================================================================
+2. CICLO DI ADDITIVITA' VS EPISTASI STATICA DEI MUTANTI COMBINATI (ΔΔΔG_coupling = ΔΔG_Combined - Σ ΔΔG_Singles)
+========================================================================================================================================================
+Variante Combinata  Componenti             ddG_BuildModel (μ±σ)   Somma_Singole (ΣddG)   ΔΔΔG_coupling   Verdetto Termodinamico (Gate 1)
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+K37L+T103L          K37L + T103L           -3.652 ± 0.656         -3.588                 -0.064          ✅ PERFETTAMENTE ADDITIVA (Zero interferenza sterica -> Gate 1 Superato!)
+K37L+H68G           K37L + H68G            -2.889 ± 0.076         -4.168                 +1.278          ⚠️ EPISTASI SUB-ADDITIVA (Lieve sovrapposizione locale)
+H68G+T103L          H68G + T103L           -2.888 ± 0.418         -2.880                 -0.008          ✅ PERFETTAMENTE ADDITIVA (Zero interferenza sterica -> Gate 1 Superato!)
+K37L+D93G           K37L + D93G            -3.789 ± 0.858         -4.054                 +0.264          ⚠️ EPISTASI SUB-ADDITIVA (Lieve sovrapposizione locale)
+A59G+D60L           A59G + D60L            -3.548 ± 0.676         -2.985                 -0.563          🌟 SINERGIA EPISTATICA POSITIVA (Più stabile della somma delle singole!)
+K37L+H68G+T103L     K37L + H68G + T103L    -5.032 ± 0.210         -5.318                 +0.287          ⚠️ EPISTASI SUB-ADDITIVA (Lieve sovrapposizione locale)
+
+========================================================================================================================================================
+3. MODELLI 3D (.PDB) SALVATI E PRONTI PER LA SOLVATAZIONE DEL PUNTO 4 (MATCHED MD COMPARISON)
+========================================================================================================================================================
+  • K37L              -> Mutante: 03_mutations/final_models_pdb/2myo_mut_K37L.pdb         | Matched WT: 03_mutations/final_models_pdb/2myo_matched_WT_for_K37L.pdb
+  • T103L             -> Mutante: 03_mutations/final_models_pdb/2myo_mut_T103L.pdb        | Matched WT: 03_mutations/final_models_pdb/2myo_matched_WT_for_T103L.pdb
+  • H68G              -> Mutante: 03_mutations/final_models_pdb/2myo_mut_H68G.pdb         | Matched WT: 03_mutations/final_models_pdb/2myo_matched_WT_for_H68G.pdb
+  • K37L+T103L        -> Mutante: 03_mutations/final_models_pdb/2myo_mut_K37L_T103L.pdb   | Matched WT: 03_mutations/final_models_pdb/2myo_matched_WT_for_K37L_T103L.pdb
+  • K37L+H68G         -> Mutante: 03_mutations/final_models_pdb/2myo_mut_K37L_H68G.pdb    | Matched WT: 03_mutations/final_models_pdb/2myo_matched_WT_for_K37L_H68G.pdb
+  • K37L+H68G+T103L   -> Mutante: 03_mutations/final_models_pdb/2myo_mut_K37L_H68G_T103L.pdb | Matched WT: 03_mutations/final_models_pdb/2myo_matched_WT_for_K37L_H68G_T103L.pdb

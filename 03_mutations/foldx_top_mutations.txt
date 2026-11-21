@@ -4,43 +4,43 @@
 =========================================================================================
 Rank  Mutazione  Codice FoldX   Modulo   ddG_FoldX (kcal/mol)   <Q_i>_400K   Note / Consenso Ankyrin
 ---------------------------------------------------------------------------------------------------------
-1     D60P       DA60P          ANK2     -4.9648                0.654        
-2     T108L       TA108L         ANK4     -3.7285                0.750        
-3     S74R       SA74R          ANK3     -3.5529                0.724        
-4     G98P       GA98P          ANK3     -3.1623                0.794        
-5     T108D       TA108D         ANK4     -3.1203                0.750        
-6     T108N       TA108N         ANK4     -3.0208                0.750        
-7     I113P       IA113P         ANK4     -2.9766                0.646        
-8     T108K       TA108K         ANK4     -2.9276                0.750        
-9     A112T       AA112T         ANK4     -2.8852                0.761        
-10    K37L       KA37L          ANK2     -2.8760                0.664        Ripristina THR in pos 3 del motivo TPLH in ANK2
-11    T108S       TA108S         ANK4     -2.8396                0.750        
-12    T108G       TA108G         ANK4     -2.7684                0.750        
-13    I113V       IA113V         ANK4     -2.6743                0.646        
-14    I113Q       IA113Q         ANK4     -2.6610                0.646        
-15    K37F       KA37F          ANK2     -2.6124                0.664        Ripristina THR in pos 3 del motivo TPLH in ANK2
-16    A59G       AA59G          ANK2     -2.5337                0.716        ★ CONSENSO ANKYRIN (Rilassa ingresso GADVNA in ANK2)
-17    K37M       KA37M          ANK2     -2.5233                0.664        Ripristina THR in pos 3 del motivo TPLH in ANK2
-18    V81L       VA81L          ANK3     -2.5077                0.612        Rilassa loop corto inter-elica in ANK3
-19    D60L       DA60L          ANK2     -2.4111                0.654        
-20    L48G       LA48G          ANK2     -2.4014                0.511        
-21    S74A       SA74A          ANK3     -2.3952                0.724        
-22    I113R       IA113R         ANK4     -2.2562                0.646        
-23    K37I       KA37I          ANK2     -2.2444                0.664        Ripristina THR in pos 3 del motivo TPLH in ANK2
-24    T108R       TA108R         ANK4     -2.1393                0.750        
-25    D60A       DA60A          ANK2     -2.1275                0.654        
-26    T103F       TA103F         ANK4     -2.1031                0.566        
-27    I113L       IA113L         ANK4     -2.0958                0.646        
-28    I113M       IA113M         ANK4     -2.0935                0.646        
-29    T108M       TA108M         ANK4     -2.0404                0.750        
-30    S74I       SA74I          ANK3     -2.0213                0.724        
-31    A107G       AA107G         ANK4     -1.8931                0.684        
-32    V84M       VA84M          ANK3     -1.8865                0.701        
-33    D60M       DA60M          ANK2     -1.8507                0.654        
-34    D27F       DA27F          ANK1     -1.8455                0.674        
-35    V76F       VA76F          ANK3     -1.8046                0.659        
-36    D60V       DA60V          ANK2     -1.7946                0.654        
-37    S74M       SA74M          ANK3     -1.7942                0.724        
-38    I113T       IA113T         ANK4     -1.7543                0.646        
-39    A107S       AA107S         ANK4     -1.7479                0.684        
-40    K85F       KA85F          ANK3     -1.7451                0.658        
+1     D60P       DA60P          ANK2     -4.9648                0.465        
+2     T108L       TA108L         ANK4     -3.7285                0.699        
+3     S74R       SA74R          ANK3     -3.5529                0.629        
+4     G98P       GA98P          ANK3     -3.1623                0.840        
+5     T108D       TA108D         ANK4     -3.1203                0.699        
+6     T108N       TA108N         ANK4     -3.0208                0.699        
+7     I113P       IA113P         ANK4     -2.9766                0.538        
+8     T108K       TA108K         ANK4     -2.9276                0.699        
+9     A112T       AA112T         ANK4     -2.8852                0.682        
+10    K37L       KA37L          ANK2     -2.8760                0.484        Ripristina THR in pos 3 del motivo TPLH in ANK2
+11    T108S       TA108S         ANK4     -2.8396                0.699        
+12    T108G       TA108G         ANK4     -2.7684                0.699        
+13    I113V       IA113V         ANK4     -2.6743                0.538        
+14    I113Q       IA113Q         ANK4     -2.6610                0.538        
+15    K37F       KA37F          ANK2     -2.6124                0.484        Ripristina THR in pos 3 del motivo TPLH in ANK2
+16    A59G       AA59G          ANK2     -2.5337                0.640        ★ CONSENSO ANKYRIN (Rilassa ingresso GADVNA in ANK2)
+17    K37M       KA37M          ANK2     -2.5233                0.484        Ripristina THR in pos 3 del motivo TPLH in ANK2
+18    V81L       VA81L          ANK3     -2.5077                0.618        Rilassa loop corto inter-elica in ANK3
+19    D60L       DA60L          ANK2     -2.4111                0.465        
+20    L48G       LA48G          ANK2     -2.4014                0.465        
+21    S74A       SA74A          ANK3     -2.3952                0.629        
+22    I113R       IA113R         ANK4     -2.2562                0.538        
+23    K37I       KA37I          ANK2     -2.2444                0.484        Ripristina THR in pos 3 del motivo TPLH in ANK2
+24    T108R       TA108R         ANK4     -2.1393                0.699        
+25    D60A       DA60A          ANK2     -2.1275                0.465        
+26    T103F       TA103F         ANK4     -2.1031                0.507        
+27    I113L       IA113L         ANK4     -2.0958                0.538        
+28    I113M       IA113M         ANK4     -2.0935                0.538        
+29    T108M       TA108M         ANK4     -2.0404                0.699        
+30    S74I       SA74I          ANK3     -2.0213                0.629        
+31    A107G       AA107G         ANK4     -1.8931                0.662        
+32    V84M       VA84M          ANK3     -1.8865                0.622        
+33    D60M       DA60M          ANK2     -1.8507                0.465        
+34    D27F       DA27F          ANK1     -1.8455                0.449        
+35    V76F       VA76F          ANK3     -1.8046                0.629        
+36    D60V       DA60V          ANK2     -1.7946                0.465        
+37    S74M       SA74M          ANK3     -1.7942                0.629        
+38    I113T       IA113T         ANK4     -1.7543                0.538        
+39    A107S       AA107S         ANK4     -1.7479                0.662        
+40    K85F       KA85F          ANK3     -1.7451                0.726        

@@ -279,10 +279,9 @@ Una volta aperta la finestra di VMD, andate su **`Graphics -> Representations`**
 
 ---
 
-## ✅ Checklist di Controllo della Fase 1 (`ROAD1`)
+## ✅ Checklist di Controllo della Fase 1 (`ROAD1` — COMPLETATA AL 100%)
 
-Prima di passare a `ROAD2.md` (Benchmark NAMD e Simulazione WT 300 K vs 400 K), verificheremo insieme di avere:
-- [x] Eseguito il **Comando 1.2** e annotato le distanze delle 3 Cisteine (`CYS 2, 45, 83`) e i legami a idrogeno/protonazione delle 4 Istidine (`HIS 40 -> HSD, HIS 67 -> HSE, HIS 68 -> HSD, HIS 80 -> HSD`).
-- [x] Eseguito il **Comando 1.4** e annotato l'RMSD tra `2MYO` e `3AAA` (`2.365 Å`) e la lista esatta dei 24 residui della **Functional Mask**.
-- [ ] Generato `01_structures/2myo_wt.psf` e `01_structures/2myo_wt.pdb` e il sistema solvatato/ionizzato `01_structures/2myo_wb_ionized.psf` e `.pdb` lanciando `vmd -dispdev text -e scripts/02_build_wt_charmm36m.tcl`.
-- [ ] Salvato le prime figure da VMD in `06_presentation/` con `vmd -e scripts/viz_01_structure_and_mask.tcl`.
+- [x] Eseguito il **Comando 1.2** ([`scripts/01_inspect_2myo.tcl`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/scripts/01_inspect_2myo.tcl)) e annotato le distanze delle 3 Cisteine (`CYS 2, 45, 83` $\rightarrow$ zero ponti disolfuro) e i legami a idrogeno/protonazione delle 4 Istidine (`HIS 40 -> HSD`, `HIS 67 -> HSE`, `HIS 68 -> HSD`, `HIS 80 -> HSD`).
+- [x] Eseguito il **Comando 1.4** e annotato l'RMSD tra `2MYO` e `3AAA` (`2.365 Å`, identità $99.2\%$) e la lista esatta dei 24 residui della **Functional Mask**.
+- [x] Generato `01_structures/2myo_wt.psf` e `01_structures/2myo_wt.pdb` e il sistema solvatato/ionizzato `01_structures/2myo_wb_ionized.psf` e `.pdb` (`21.461` atomi, $q_{\text{tot}} = 0.0000\text{ e}$) lanciando `vmd -dispdev text -e scripts/02_build_wt_charmm36m.tcl`.
+- [x] **Commento Scientifico e Considerazioni Teoriche sulla Fase 1:** Vedi i documenti dedicati **[`01_structures/RISULTATI_E_COMMENTO_FASE1.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/01_structures/RISULTATI_E_COMMENTO_FASE1.md)** e **[`SCALETTA_PROF/PUNTO_1_ANALISI_PROTEINA.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/SCALETTA_PROF/PUNTO_1_ANALISI_PROTEINA.md)**.

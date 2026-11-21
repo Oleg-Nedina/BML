@@ -152,10 +152,11 @@ Dalla Fase 2 ricaveremo **2 figure chiave per la Slide 4 (Caratterizzazione Base
 
 ---
 
-## ✅ Checklist Operativa della Fase 2 (`ROAD2`)
+## ✅ Checklist Operativa della Fase 2 (`ROAD2` — COMPLETATA AL 100%)
 
-- [ ] **Passo 2.0:** Creare `common/charmm36/toppar_water_ions_namd.prm` (privo delle righe lipidi/`return` dopo la riga 124).
-- [ ] **Passo 2.1:** Eseguire il benchmark NAMD (`02_wt_baseline/benchmark.conf`) con `+p16` (ed eventuale test di scaling `+p4`, `+p8`, `+p16`) e annotare i **`ns/day`**.
-- [ ] **Passo 2.2:** Fissare insieme il **Computational Budget** in base ai `ns/day` misurati.
-- [ ] **Passo 2.3:** Lanciare le simulazioni baseline del WT a **`300 K`** e **`400 K`**.
-- [ ] **Passo 2.4:** Eseguire lo script di analisi (`RMSD`, `RMSF`, $Q$ globale, $Q$ per Repeat, $Q_i$ per residuo), generare le Figure 4 e 5 e leggere la classifica dei residui instabili ($\langle Q_i \rangle < 0.6$) da passare a FoldX/Rosetta/FireProt nella Fase 3!
+- [x] **Passo 2.0:** Creato `common/charmm36/toppar_water_ions_namd.prm` (privo delle righe lipidi/`return` dopo la riga 124).
+- [x] **Passo 2.1:** Eseguito il benchmark NAMD (`02_wt_baseline/benchmark.conf`) scoprendo che **`namd3 +p8` (8 core fisici AVX-512) = `12.68 ns/day`** batte del **`+40.7%`** `+p16` (`9.01 ns/day`).
+- [x] **Passo 2.2:** Fissato il **Computational Budget** in base ai `12.68 ns/day` misurati (`Slide 21`).
+- [x] **Passo 2.3:** Completate il 15 Novembre le simulazioni baseline del WT a **`300 K` (`1.5 ns`)** e **`400 K` (`2.5 ns`)** ([`02_wt_baseline/overnight_master.log`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/02_wt_baseline/overnight_master.log)).
+- [x] **Passo 2.4:** Eseguito [`scripts/03_analyze_wt_baseline.tcl`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/scripts/03_analyze_wt_baseline.tcl) (`pbc wrap`, `RMSD`, `RMSF`, `Hbonds -type unique`, `SASA`, `Rgyr`, `% Alpha-Helix`, $Q$ globale, $Q$ per Repeat, $\langle Q_i \rangle_{400\text{K}}$ per residuo), generati i grafici vettoriali [`fig5_wt_baseline_plots.pdf`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/06_presentation/fig5_wt_baseline_plots.pdf) e [`fig5b_wt_analysisMD_observables.pdf`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/06_presentation/fig5b_wt_analysisMD_observables.pdf), ed estratta la classifica dei 28 residui instabili dello scaffold ([`02_wt_baseline/unstable_residues_report.txt`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/02_wt_baseline/unstable_residues_report.txt)).
+- [x] **Commento Scientifico e Considerazioni Teoriche sulla Fase 2:** Vedi i documenti dedicati **[`02_wt_baseline/RISULTATI_E_COMMENTO_FASE2.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/02_wt_baseline/RISULTATI_E_COMMENTO_FASE2.md)** e **[`SCALETTA_PROF/PUNTO_2_CARATTERIZZAZIONE_E_BASELINE_WT.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/SCALETTA_PROF/PUNTO_2_CARATTERIZZAZIONE_E_BASELINE_WT.md)**.

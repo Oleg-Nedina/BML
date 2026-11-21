@@ -64,3 +64,37 @@ Questo file raccoglie tutte le **"chicche" scientifiche, biofisiche e computazio
 - **Spiegazione Architetturale HPC (da portare nella Slide 3 del Computational Budget!):**
   - Nei kernel compute-bound e fortemente vettorizzati di NAMD 3 (calcolo delle forze non-bonded di Lennard-Jones in **AVX-512** + FFT 3D per il **Particle Mesh Ewald** su una scatola compatta di `21.461` atomi divisa in 36 patch), lanciare 2 thread SMT sullo stesso core fisico provoca **contesa sulle pipeline vettoriali FMA/AVX-512, aumento del thrashing della cache L1/L2 e raddoppio dell'overhead di sincronizzazione/migrazione del Load Balancer Charm++** (`800 compute objects` su 16 PE invece di 8 PE).
   - Fissare il numero di worker agli **8 core fisici (`+p8`)** regala uno **speedup netto del $+40\%$** (`da 9.0 a 12.7 ns/day`) e riduce il tempo della campagna notturna di ben 3 ore!
+
+---
+
+## 🔥 3. Scoperte Dinamiche dalla Simulazione MD Vera del Wild-Type (300 K vs 400 K, Fase 2)
+
+### 3.1 Il Meccanismo Atomistico di Cedimento di `ANK2` (`LYS 37`) e del C-Cap `ANK4` (`THR 103`) a `400 K`
+Confrontando le occupancy dei legami a idrogeno della run reale a **`300 K` (`1.5 ns`, [`hbonds_details_300K.txt`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/02_wt_baseline/hbonds_details_300K.txt))** con quella a **`400 K` (`2.5 ns`, [`hbonds_details_400K.txt`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/02_wt_baseline/hbonds_details_400K.txt))** e con il report dei contatti nativi ([`unstable_residues_report.txt`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/02_wt_baseline/unstable_residues_report.txt)):
+1. **Perché `ANK2` è il modulo che cede di più a 400 K ($Q_{\text{ANK2}} = 0.5856$)?**
+   - In `ANK3`, la posizione 3 del motivo firma `TPLH` ha la Treonina canonica (`THR 70`), che a `300 K` forma il legame a idrogeno inter-repeat `THR70-Side-OG1 -> ILE61-Main-O` (`24.60%` occupancy).
+   - In `ANK2` (`G35-R36-K37-P38-L39-H40`), la posizione 3 è occupata da **`LYS 37`**, che soffre di repulsione elettrostatica con `ARG 36` e ripiega la propria catena laterale formando un ponte salino parassita con **`ASP 60`** (`LYS37-NZ -> ASP60-OD2` `26.20%` + `OD1` `21.41%` a `300 K`).
+   - A `400 K`, questa tensione fa collassare l'interfaccia `ANK1–ANK2` (`LEU32-Main-N -> ARG36-Main-O` crolla dal `43.62%` allo `0.08%`), l'elica interna di `ANK2` (`ALA43 -> LEU39` crolla dal `32.58%` al `5.03%`) e il loop `GADVNA` (`LYS 37`: $\langle Q_{37} \rangle = 0.4845$; `ASP 60`: $\langle Q_{60} \rangle = 0.4645$; `PRO 64`: $\langle Q_{64} \rangle = 0.4406$).
+2. **Perché cede l'ingresso del C-cap `ANK4` (`LEU 102 – THR 103`, nucleo di folding primario secondo *Lowe & Itzhaki, PNAS 2007*)?**
+   - A `400 K`, il legame a idrogeno di N-capping `THR103-Side-OG1 -> ASP100-Main-O` scende dal `15.56%` (`300 K`) a `0.00%` (`400 K`) e il legame elicoidale `ALA107-Main-N -> LEU102-Main-O` crolla dal `18.48%` allo `0.16%`, facendo scendere `LEU 102` ($\langle Q_{102} \rangle = 0.4942$) e `THR 103` ($\langle Q_{103} \rangle = 0.5075$) sotto la soglia di stabilità di Bekker ($0.60$).
+
+---
+
+## 🎯 4. Scoperte dallo Screening Multi-Tool (FireProt 2.0 + ThermoMPNN-D + FoldX 88/88, Fase 3)
+
+### 4.1 La "Trappola Biofisica" di `S74A` Evitata Grazie all'Ispezione di `HIS 40 (HSD)` in Fase 1
+- Sia **FireProt 2.0** (`isBTC = true`, `majority = true`, `isHighCombined = true`, $\Delta\Delta G = -0.55\text{ kcal/mol}$), sia **FoldX 5** ($\Delta\Delta G = -2.395\text{ kcal/mol}$), sia **ThermoMPNN-D** ($\Delta\Delta G = -0.166\text{ kcal/mol}$) suggeriscono la mutazione **`S74A`** in `ANK3` (perché nel consenso generico `TPLHLAA` la posizione 7/8 è Alanina).
+- Tuttavia, grazie alla nostra scoperta 1.1 della Fase 1, sappiamo che nella Myotrophin l'ossigeno **`OG` di `SER 74`** è l'accettore del ponte a idrogeno inter-repeat ($2.44\text{ Å}$) donato da **`HIS 40 (HSD)`**! Mutare `SER 74 -> ALA` eliminerebbe il gruppo `-OH`, rompendo la cucitura tra `ANK2` e `ANK3`.
+- **Valore per le Slide (Slide 5):** Esempio perfetto di come la conoscenza biofisica strutturale prevenga un falso positivo dei predittori automatici ([`03_mutations/ANALISI_MUTAZIONI_FIREPROT_E_CONSENSO.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/03_mutations/ANALISI_MUTAZIONI_FIREPROT_E_CONSENSO.md)).
+
+### 4.2 Convergenza "5 Pilastri su 5" su `K37L` (`ANK2`), `T103L` (`ANK4`) e `H68G` (`ANK3`, #1 BTC FireProt)
+- **`K37L` (`ANK2`):** **5/5 pilastri concordi** ($\langle Q_{37} \rangle_{400\text{K}} = 0.4845$, $\Delta\Delta G_{\text{FoldX}} = -2.876$, $\Delta\Delta G_{\text{MPNN}} = -0.359$, $\Delta\Delta G_{\text{FireProt}} = -0.89$).
+- **`T103L` (`ANK4`):** **5/5 pilastri concordi** ($\langle Q_{103} \rangle_{400\text{K}} = 0.5075$, $\Delta\Delta G_{\text{FoldX}} = -1.670$ con $\Delta E_{\text{VdW+SolvH}} = -3.476$, $\Delta\Delta G_{\text{MPNN}} = -0.116$, $\Delta\Delta G_{\text{FireProt}} = -1.18$, consenso `TPLHLAA`).
+- **`H68G` (`ANK3`):** **#1 *Back-to-Consensus* di FireProt 2.0** (`isBTC = true, majority = true, ratio = true, isHighCombined = true`, $\Delta\Delta G_{\text{FireProt}} = -2.33$, $\Delta\Delta G_{\text{FoldX}} = -1.736$, risolve l'outlier di Ramachandran nel quadrante sinistrorso $\phi = +38.3^\circ$ in pos. 1 del $\beta$-turn `ANK2–ANK3`).
+
+### 4.3 Validazione Pre-MD in `FoldX BuildModel` (`n=5` Run con *Matched WT References*, Slide 19): Additività Perfetta di `K37L + T103L` e Sinergia Epistatica di `A59G + D60L`
+Dall'esecuzione di [`scripts/07_run_foldx_buildmodel.py`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/scripts/07_run_foldx_buildmodel.py) ([`03_mutations/buildmodel_epistasis_report.txt`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/03_mutations/buildmodel_epistasis_report.txt) e [`06_presentation/fig8b_buildmodel_singles_doubles_epistasis.pdf`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/06_presentation/fig8b_buildmodel_singles_doubles_epistasis.pdf)):
+1. **Additività al 100% di `K37L + T103L` (`ANK2 + ANK4`):** La somma delle due mutazioni singole a 5/5 pilastri è `-2.438 + (-1.150) = -3.588 kcal/mol`, mentre il Doppio Mutante `K37L + T103L` raggiunge **`-3.652 ± 0.656 kcal/mol`** (`Best = -4.766 kcal/mol`) con accoppiamento epistatico **$\Delta\Delta\Delta G_{\text{coupling}} = -0.064\text{ kcal/mol}$** (zero interferenza sterica!).
+2. **Sub-additività di `K37L + H68G` (`+1.278 kcal/mol`):** Poiché `LYS 37` e `HIS 68` si trovano entrambi adiacenti a `HIS 67 (HSE)`, i loro gusci di rilassamento locale si sovrappongono parzialmente, dimostrando perché è essenziale eseguire `BuildModel` prima della MD.
+3. **Conferma fisica dell'epistasi AI su `A59G + D60L` (`-0.563 kcal/mol` di sinergia):** `D60L` da sola è frenata dallo scontro con `ALA 59` (`-0.430 ± 1.743 kcal/mol`), ma combinata con `A59G` (`-2.555 kcal/mol`) scende a **`-3.548 ± 0.676 kcal/mol`**, confermando con il force field di FoldX l'epistasi predetta dalla Graph Neural Network ThermoMPNN-D!
+4. **Record assoluto del Triplo Mutante `K37L + H68G + T103L` (`ANK2 + ANK3 + ANK4`):** **`-5.032 ± 0.210 kcal/mol`** (`Best = -5.392 kcal/mol`).

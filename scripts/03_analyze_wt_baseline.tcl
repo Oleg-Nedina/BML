@@ -60,6 +60,10 @@ proc analyze_traj {psf_file pdb_file dcd_file tag} {
     set ca        [atomselect top "protein and name CA"]
     set numres    [$ca num]
 
+    # 0. Ricomposizione PBC obbligatoria (AGENTS.md Sez. 2.C.1 & Laboratory_Project_2026.pdf Slide 22)
+    puts " -> (0/7) Ricomposizione condizioni periodiche al contorno (pbc wrap)..."
+    catch {pbc wrap -compound residue -center com -centersel "protein" -all}
+
     # 1. Allineamento della traiettoria sul backbone del frame 0 (analysisMD.tcl righe 17-27)
     puts " -> (1/7) Allineamento traiettoria sul backbone (Frame 0)..."
     set reference [atomselect top "protein and backbone" frame 0]
@@ -95,10 +99,11 @@ proc analyze_traj {psf_file pdb_file dcd_file tag} {
     }
     close $out_rmsf
 
-    # 4. Calcolo Hydrogen Bonds (analysisMD.tcl righe 57-62 + dettaglio coppie donatore-accettore)
-    puts " -> (4/7) Calcolo Hydrogen Bonds (backbone e proteina completa)..."
+    # 4. Calcolo Hydrogen Bonds (analysisMD.tcl righe 57-62 + dettaglio occupancy -type unique)
+    puts " -> (4/7) Calcolo Hydrogen Bonds (proteina completa + dettaglio coppie donatore-accettore)..."
     file delete -force "02_wt_baseline/hbonds_${tag}.dat" "02_wt_baseline/hbonds_details_${tag}.txt"
     hbonds -sel1 $protein -upsel no -writefile yes -polar yes -plot no \
+           -type unique \
            -frames 0:$step:[expr {$nf - 1}] \
            -outfile "02_wt_baseline/hbonds_${tag}.dat" \
            -detailout "02_wt_baseline/hbonds_details_${tag}.txt"

@@ -24,7 +24,15 @@ Questo documento spiega in modo semplice e operativo **come lanciare ogni script
 | **10** | `scripts/04_ankyrin_consensus_and_targets.py` | Fase 3 | Consenso Ankyrin + Config FoldX | `python3 scripts/04_ankyrin_consensus_and_targets.py` |
 | **11** | `03_mutations/repair.cfg` | Fase 3 | FoldX `RepairPDB` | `foldx -f 03_mutations/repair.cfg > 03_mutations/repair.log` |
 | **12** | `03_mutations/position_scan_hotspots.cfg` | Fase 3 | FoldX `PositionScan` | `foldx -f 03_mutations/position_scan_hotspots.cfg > 03_mutations/position_scan.log` |
+| **12b** | `scripts/04b_run_remaining_foldx_parallel.sh` | Fase 3 | **FoldX Parallelo 8 Core (`88/88`)** | `bash scripts/04b_run_remaining_foldx_parallel.sh` |
 | **13** | `scripts/05_parse_foldx_screening.py` | Fase 3 | **Classifica + Grafico PDF FoldX** | `python3 scripts/05_parse_foldx_screening.py` |
+| **14** | `scripts/06_build_consensus_matrix.py` | Fase 3 | **Matrice Consenso 5 Pilastri + PDF** | `python3 scripts/06_build_consensus_matrix.py` |
+| **15** | `scripts/07_run_foldx_buildmodel.py` | Fase 3 | **FoldX `BuildModel` (`n=5`) + Epistasi + PDF** | `python3 scripts/07_run_foldx_buildmodel.py` |
+| **16** | `scripts/viz_04_mutations_zoom.tcl` | Fase 3 | **Grafica 3D VMD (Matched WT vs Mutanti)** | `vmd -e scripts/viz_04_mutations_zoom.tcl` |
+| **17** | `scripts/08_build_matched_mutants_charmm36m.tcl` | Fase 4 | **Setup Topologico Matched CHARMM36m + `.conf`** | `vmd -dispdev text -e scripts/08_build_matched_mutants_charmm36m.tcl` |
+| **18** | `04_md_simulations/run_batch_phase4.sh` | Fase 4 | **Batch MD Multi-Seed (`seed1`/`oleg`/`alessia`)** | `bash 04_md_simulations/run_batch_phase4.sh seed1 8` |
+| **19** | `scripts/09_analyze_matched_validation.tcl` | Fase 5 | **Analisi VMD Multi-Seed (`analysisMD.tcl` + $Q$)** | `vmd -dispdev text -e scripts/09_analyze_matched_validation.tcl` |
+| **20** | `scripts/10_plot_final_validation_bekker.py` | Fase 5 | **Bekker Table II + Test $t$ + Grafici PDF Finali** | `python3 scripts/10_plot_final_validation_bekker.py` |
 
 ---
 
