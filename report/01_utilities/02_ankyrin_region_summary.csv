@@ -1,0 +1,5 @@
+Region,Start,End,Residues,Helix,Turn,Coil
+N_terminal,1,27,27,19,3,5
+Repeat_1,28,60,33,15,14,4
+Repeat_2,61,93,33,15,9,9
+C_terminal,94,118,25,6,15,4
