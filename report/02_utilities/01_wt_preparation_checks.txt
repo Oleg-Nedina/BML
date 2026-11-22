@@ -1,0 +1,38 @@
+=== SYSTEM COMPOSITION ===
+Total atoms: 21461
+Protein atoms: 1815
+Protein heavy atoms: 902
+CA atoms: 118
+Water molecules: 6535
+Na+: 23
+Cl-: 18
+Protein charge: -5.0000 e
+Total charge: 0.0000 e
+
+=== HISTIDINE STATES ===
+Residue 40: HSD, HD1=1, HE2=0
+Residue 67: HSE, HD1=0, HE2=1
+Residue 68: HSD, HD1=1, HE2=0
+Residue 80: HSD, HD1=1, HE2=0
+
+=== HISTIDINE CONTACT DISTANCES ===
+ND140 - OG74: 2.441 A
+ND167 - NZ37: 3.243 A
+NE267 - O35: 2.396 A
+
+=== STRUCTURAL INTEGRITY ===
+Matching CA residues: 118
+Maximum CA displacement: 0.0000 A
+
+=== SOLVATION BOX ===
+Box dimensions (A): 71.84000015258789 58.97200012207031 54.84000015258789
+Atomic-coordinate center (A): 7.713042736053467 -8.094215393066406 86.01472473144531
+Bounding-box midpoint (A): 7.843999862670898 -8.152999877929688 85.9419994354248
+Minimum-side protein margins (A): 12.814000129699707 11.996999740600586 12.783000946044922
+Maximum-side protein margins (A): 11.999000549316406 11.999000549316406 11.964996337890625
+
+=== CLOSE CONTACTS ===
+N82 - O80: 2.143 A
+Close heavy-atom pairs (<2.25 A): 1
+Protein-water O pairs (<2.0 A): 0
+Protein-ion pairs (<2.0 A): 0

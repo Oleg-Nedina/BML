@@ -1,0 +1,5 @@
+Region,Residues,Mean_Qi_400K_final30,Contact_weighted_Qi_400K_final30,RMSF_300K_mean_A,RMSF_400K_mean_A,Eligible_residues,Eligible_Qi_under_0.60
+N-terminal,1-27,0.6588,0.6468,1.138,2.3563,14,5
+Ankyrin repeat 1,28-60,0.5465,0.5368,1.1246,2.8432,27,18
+Ankyrin repeat 2,61-93,0.6074,0.5961,1.1172,2.4206,27,11
+C-terminal,94-118,0.6412,0.6247,1.618,3.3364,20,7

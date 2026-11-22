@@ -1,0 +1,119 @@
+Residue,ResName,SASA_A2,MaxASA_A2,RSA,Region,Exposure
+1,MET,208.5740,224,0.9311,N-terminal,Exposed
+2,CYS,66.3110,167,0.3971,N-terminal,Exposed
+3,ASP,101.2920,193,0.5248,N-terminal,Exposed
+4,LYS,152.7660,236,0.6473,N-terminal,Exposed
+5,GLU,95.5020,223,0.4283,N-terminal,Exposed
+6,PHE,41.3010,240,0.1721,N-terminal,Partially exposed
+7,MET,66.4170,224,0.2965,N-terminal,Exposed
+8,TRP,153.2670,285,0.5378,N-terminal,Exposed
+9,ALA,0.0000,129,0.0000,N-terminal,Buried
+10,LEU,2.6570,201,0.0132,N-terminal,Buried
+11,LYS,113.6340,236,0.4815,N-terminal,Exposed
+12,ASN,100.9150,195,0.5175,N-terminal,Exposed
+13,GLY,11.8130,104,0.1136,N-terminal,Partially exposed
+14,ASP,33.4510,193,0.1733,N-terminal,Partially exposed
+15,LEU,31.6400,201,0.1574,N-terminal,Partially exposed
+16,ASP,120.4580,193,0.6241,N-terminal,Exposed
+17,GLU,57.1710,223,0.2564,N-terminal,Exposed
+18,VAL,10.9700,174,0.0630,N-terminal,Partially exposed
+19,LYS,94.0220,236,0.3984,N-terminal,Exposed
+20,ASP,97.4360,193,0.5048,N-terminal,Exposed
+21,TYR,74.8750,263,0.2847,N-terminal,Exposed
+22,VAL,12.6440,174,0.0727,N-terminal,Partially exposed
+23,ALA,65.2440,129,0.5058,N-terminal,Exposed
+24,LYS,178.8440,236,0.7578,N-terminal,Exposed
+25,GLY,39.2290,104,0.3772,N-terminal,Exposed
+26,GLU,137.4820,223,0.6165,N-terminal,Exposed
+27,ASP,54.1720,193,0.2807,N-terminal,Exposed
+28,VAL,4.8540,174,0.0279,Repeat 1,Buried
+29,ASN,108.3390,195,0.5556,Repeat 1,Exposed
+30,ARG,120.9890,274,0.4416,Repeat 1,Exposed
+31,THR,87.9720,172,0.5115,Repeat 1,Exposed
+32,LEU,20.7390,201,0.1032,Repeat 1,Partially exposed
+33,GLU,135.5410,223,0.6078,Repeat 1,Exposed
+34,GLY,70.4780,104,0.6777,Repeat 1,Exposed
+35,GLY,38.2020,104,0.3673,Repeat 1,Exposed
+36,ARG,115.0860,274,0.4200,Repeat 1,Exposed
+37,LYS,16.3330,236,0.0692,Repeat 1,Partially exposed
+38,PRO,7.0040,159,0.0441,Repeat 1,Buried
+39,LEU,3.3810,201,0.0168,Repeat 1,Buried
+40,HIS,46.6260,224,0.2082,Repeat 1,Partially exposed
+41,TYR,46.5800,263,0.1771,Repeat 1,Partially exposed
+42,ALA,0.0000,129,0.0000,Repeat 1,Buried
+43,ALA,2.4150,129,0.0187,Repeat 1,Buried
+44,ASP,37.4880,193,0.1942,Repeat 1,Partially exposed
+45,CYS,49.5400,167,0.2966,Repeat 1,Exposed
+46,GLY,0.0000,104,0.0000,Repeat 1,Buried
+47,GLN,86.4400,225,0.3842,Repeat 1,Exposed
+48,LEU,34.1600,201,0.1700,Repeat 1,Partially exposed
+49,GLU,86.5420,223,0.3881,Repeat 1,Exposed
+50,ILE,1.4490,197,0.0074,Repeat 1,Buried
+51,LEU,5.3140,201,0.0264,Repeat 1,Buried
+52,GLU,66.8980,223,0.3000,Repeat 1,Exposed
+53,PHE,19.0580,240,0.0794,Repeat 1,Partially exposed
+54,LEU,11.3520,201,0.0565,Repeat 1,Partially exposed
+55,LEU,6.3850,201,0.0318,Repeat 1,Buried
+56,LEU,101.5580,201,0.5053,Repeat 1,Exposed
+57,LYS,89.4060,236,0.3788,Repeat 1,Exposed
+58,GLY,39.1570,104,0.3765,Repeat 1,Exposed
+59,ALA,50.6490,129,0.3926,Repeat 1,Exposed
+60,ASP,11.4750,193,0.0595,Repeat 1,Partially exposed
+61,ILE,18.5630,197,0.0942,Repeat 2,Partially exposed
+62,ASN,72.6860,195,0.3727,Repeat 2,Exposed
+63,ALA,52.2060,129,0.4047,Repeat 2,Exposed
+64,PRO,5.2450,159,0.0330,Repeat 2,Buried
+65,ASP,108.2850,193,0.5611,Repeat 2,Exposed
+66,LYS,172.2500,236,0.7299,Repeat 2,Exposed
+67,HIS,64.8540,224,0.2895,Repeat 2,Exposed
+68,HIS,140.3480,224,0.6266,Repeat 2,Exposed
+69,ILE,50.7200,197,0.2575,Repeat 2,Exposed
+70,THR,2.8440,172,0.0165,Repeat 2,Buried
+71,PRO,2.8980,159,0.0182,Repeat 2,Buried
+72,LEU,14.2500,201,0.0709,Repeat 2,Partially exposed
+73,LEU,10.8690,201,0.0541,Repeat 2,Partially exposed
+74,SER,18.9680,155,0.1224,Repeat 2,Partially exposed
+75,ALA,0.2420,129,0.0019,Repeat 2,Buried
+76,VAL,10.6980,174,0.0615,Repeat 2,Partially exposed
+77,TYR,128.6960,263,0.4893,Repeat 2,Exposed
+78,GLU,57.5190,223,0.2579,Repeat 2,Exposed
+79,GLY,57.0470,104,0.5485,Repeat 2,Exposed
+80,HIS,72.8520,224,0.3252,Repeat 2,Exposed
+81,VAL,25.8330,174,0.1485,Repeat 2,Partially exposed
+82,SER,64.9680,155,0.4191,Repeat 2,Exposed
+83,CYS,0.9660,167,0.0058,Repeat 2,Buried
+84,VAL,8.3440,174,0.0480,Repeat 2,Buried
+85,LYS,129.6320,236,0.5493,Repeat 2,Exposed
+86,LEU,48.3140,201,0.2404,Repeat 2,Partially exposed
+87,LEU,11.1100,201,0.0553,Repeat 2,Partially exposed
+88,LEU,67.9810,201,0.3382,Repeat 2,Exposed
+89,SER,88.7150,155,0.5724,Repeat 2,Exposed
+90,LYS,84.2050,236,0.3568,Repeat 2,Exposed
+91,GLY,34.2170,104,0.3290,Repeat 2,Exposed
+92,ALA,23.2330,129,0.1801,Repeat 2,Partially exposed
+93,ASP,98.6430,193,0.5111,Repeat 2,Exposed
+94,LYS,57.7190,236,0.2446,C-terminal,Partially exposed
+95,THR,62.4220,172,0.3629,C-terminal,Exposed
+96,VAL,72.6610,174,0.4176,C-terminal,Exposed
+97,LYS,72.6980,236,0.3080,C-terminal,Exposed
+98,GLY,19.1570,104,0.1842,C-terminal,Partially exposed
+99,PRO,98.9510,159,0.6223,C-terminal,Exposed
+100,ASP,111.4040,193,0.5772,C-terminal,Exposed
+101,GLY,25.4780,104,0.2450,C-terminal,Partially exposed
+102,LEU,45.9850,201,0.2288,C-terminal,Partially exposed
+103,THR,14.1660,172,0.0824,C-terminal,Partially exposed
+104,ALA,0.2420,129,0.0019,C-terminal,Buried
+105,LEU,76.6270,201,0.3812,C-terminal,Exposed
+106,GLU,153.8240,223,0.6898,C-terminal,Exposed
+107,ALA,25.1810,129,0.1952,C-terminal,Partially exposed
+108,THR,61.5680,172,0.3580,C-terminal,Exposed
+109,ASP,127.8110,193,0.6622,C-terminal,Exposed
+110,ASN,60.5190,195,0.3104,C-terminal,Exposed
+111,GLN,165.3740,225,0.7350,C-terminal,Exposed
+112,ALA,43.5770,129,0.3378,C-terminal,Exposed
+113,ILE,3.8640,197,0.0196,C-terminal,Buried
+114,LYS,59.7800,236,0.2533,C-terminal,Exposed
+115,ALA,36.8100,129,0.2853,C-terminal,Exposed
+116,LEU,36.4760,201,0.1815,C-terminal,Partially exposed
+117,LEU,91.4520,201,0.4550,C-terminal,Exposed
+118,GLN,176.8860,225,0.7862,C-terminal,Exposed
