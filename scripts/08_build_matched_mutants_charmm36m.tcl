@@ -44,8 +44,8 @@ proc write_matched_namd_conf {conf_path psf_rel pdb_rel out_rel seed_val lx ly l
     puts $fp "firsttimestep      0"
     puts $fp ""
     puts $fp "paraTypeCharmm     on"
-    puts $fp "parameters         common/charmm36/par_all36m_prot.prm"
-    puts $fp "parameters         common/charmm36/toppar_water_ions_namd.prm"
+    puts $fp "parameters         ../../common/charmm36/par_all36m_prot.prm"
+    puts $fp "parameters         ../../common/charmm36/toppar_water_ions_namd.prm"
     puts $fp "temperature        \$temperature"
     puts $fp "seed               $seed_val"
     puts $fp ""
@@ -109,11 +109,11 @@ proc write_matched_namd_conf {conf_path psf_rel pdb_rel out_rel seed_val lx ly l
 # 1. Configura le repliche Seed 2 e Seed 3 del Wild-Type (Seed 1 e' gia' stata eseguita in 02_wt_baseline/wt_400K.dcd!)
 file mkdir "04_md_simulations/WT"
 write_matched_namd_conf "04_md_simulations/WT/wt_400K_seed2.conf" \
-    "01_structures/2myo_wb_ionized.psf" "01_structures/2myo_wb_ionized.pdb" \
-    "04_md_simulations/WT/wt_400K_seed2" 23456 71.840 58.972 54.840 7.735 -8.087 86.003
+    "../../01_structures/2myo_wb_ionized.psf" "../../01_structures/2myo_wb_ionized.pdb" \
+    "wt_400K_seed2" 23456 71.840 58.972 54.840 7.735 -8.087 86.003
 write_matched_namd_conf "04_md_simulations/WT/wt_400K_seed3.conf" \
-    "01_structures/2myo_wb_ionized.psf" "01_structures/2myo_wb_ionized.pdb" \
-    "04_md_simulations/WT/wt_400K_seed3" 34567 71.840 58.972 54.840 7.735 -8.087 86.003
+    "../../01_structures/2myo_wb_ionized.psf" "../../01_structures/2myo_wb_ionized.pdb" \
+    "wt_400K_seed3" 34567 71.840 58.972 54.840 7.735 -8.087 86.003
 
 # 2. Costruisci i sistemi CHARMM36m + TIP3P + 0.15 M NaCl per le varianti mutate
 set variants_list {
@@ -214,8 +214,8 @@ foreach {vname src_pdb} $variants_list {
     # Genera i 3 file .conf per i 3 velocity seeds (12345, 23456, 34567)
     foreach {s_idx s_val} {1 12345 2 23456 3 34567} {
         write_matched_namd_conf "$vdir/${vname}_400K_seed${s_idx}.conf" \
-            "$vdir/${vname}_wb_ionized.psf" "$vdir/${vname}_wb_ionized.pdb" \
-            "$vdir/${vname}_400K_seed${s_idx}" $s_val $lx $ly $lz $cx $cy $cz
+            "${vname}_wb_ionized.psf" "${vname}_wb_ionized.pdb" \
+            "${vname}_400K_seed${s_idx}" $s_val $lx $ly $lz $cx $cy $cz
     }
     mol delete all
 }

@@ -77,6 +77,17 @@ Eseguendo [`scripts/08_build_matched_mutants_charmm36m.tcl`](file:///home/olly/U
 
 ---
 
-## 5. ⏭️ Come Agire Dopo nel Futuro (Collegamento col Punto 5)
+## 5. 🏆 Risultati Reali dello Screening MD `Seed 1` a `400 K` (`WT` vs `K37L`, `T103L`, `K37L_T103L`, `K37L_H68G_T103L`) e Prossimi Passi
 
-Appena completate le repliche multi-seed del Punto 4, tutte le 12 traiettorie a `400 K` (più il controllo a `300 K`) verranno processate in un'unica passata dallo script di validazione statistica del **Punto 5**, che estrarrà automaticamente le medie e deviazioni standard ($\mu \pm \sigma$) tra i 3 seed per popolare la **Table II finale** (stile *Bekker et al., 2019* p. 434) e i grafici vettoriali `.pdf` per la presentazione del 16 Dicembre!
+Il 22 Novembre 2026 è stata completata con successo l'intera batteria di screening MD `Seed 1` (`12345`, `2.5 ns` ciascuna a `400 K`) tramite [`04_md_simulations/run_4_screening_400K.sh`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/04_md_simulations/run_4_screening_400K.sh). I plot e i report separati di ogni singola simulazione sono archiviati in [`05_analysis/single_runs/`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/05_analysis/single_runs) e commentati in dettaglio in **[`05_analysis/RISULTATI_E_COMMENTO_SCREENING_400K_SEED1.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/05_analysis/RISULTATI_E_COMMENTO_SCREENING_400K_SEED1.md)**:
+
+- **`00_WT` (`2MYO` Wild-Type):** `Q: hydrophilic-all = 0.6750 ± 0.0067`, `Q: all-all = 0.6948 ± 0.0054`, `Q_ANK2 = 0.6015`, `RMSD_BB = 6.68 ± 0.52 Å`, `Mask3AAA_RMSD = 7.27 ± 0.99 Å`, `Rgyr = 15.74 Å`, `SASA = 8838.8 Å²`, **`41` residui dello scaffold instabili** ($\langle Q_i \rangle_{400\text{K}} < 0.60$).
+- **`01_K37L` (Singolo 1, `ANK2`):** `Q: hydrophilic-all = 0.7134 ± 0.0070` (**`+3.84%`**), `Q: all-all = 0.7243 ± 0.0052` (**`+2.95%`**), `Q_ANK2 = 0.6351`, `RMSD_BB = 4.17 ± 0.33 Å`, `SASA = 7941.6 Å²` (`-897 Å²`), **`25` residui instabili (`-16` residui salvati!)**.
+- **`02_T103L` (Singolo 2, `ANK4`):** `Q: hydrophilic-all = 0.7047 ± 0.0066` (**`+2.97%`**), `Q: all-all = 0.7124 ± 0.0046`, `RMSD_BB = 3.77 ± 0.19 Å`, `Mask3AAA_RMSD = 3.37 ± 0.36 Å`, `SASA = 7969.2 Å²` (`-870 Å²`), **`30` residui instabili (`-11`)**.
+- **`03_K37L_T103L` (Doppio `ANK2 + ANK4`):** **`Q: hydrophilic-all = 0.7178 ± 0.0075` (`+4.28%`, #1 assoluto!)**, `Q: all-all = 0.7194 ± 0.0061`, **`Rgyr = 14.76 ± 0.34 Å` (#1 assoluto per compattezza globulare)**, interfaccia `ANK1–ANK2 = 0.266` (`×2.35` vs WT), **`31` residui instabili (`-10`)**.
+- **`04_K37L_H68G_T103L` (Triplo `ANK2 + ANK3 + ANK4`):** **`Q: all-all = 0.7289 ± 0.0049` (#1 assoluto, `+3.41%`)**, **`Q: hydrophilic-all = 0.7172 ± 0.0056`**, **`Q: hydrophobic-small = 0.6631 ± 0.0140` (#1 assoluto)**, **`Q_ANK2 = 0.6444` (#1 assoluto, `+4.29%`)**, **`RMSD_BB = 3.30 ± 0.42 Å` (#1 assoluto, `-51%`)**, **`Mask3AAA_RMSD = 2.83 ± 0.26 Å` (#1 assoluto, `-61%`)**, **`SASA = 7646.9 Å²` (#1 assoluto, `-1192 Å²`)**, **`23` residui instabili (`-18` residui salvati = `-44%`, #1 assoluto!)**, con arresto totale della fluttuazione del loop `ASP 60` ($\text{RMSF}_{60} = 1.50\text{ Å}$) e di `LEU 37` ($\text{RMSF}_{37} = 0.91\text{ Å}$).
+
+### ⏭️ Prossimo Passo: Campagna di Validazione Statistica (`Seed 2` e `Seed 3` + Verifica con Pre-Equilibrazione Restrained a `300 K`)
+Completato lo screening sul `Seed 1`, la campagna di validazione finale prevede:
+1. L'unione dei 5 dataset `Seed 1` nei plot comparativi multi-sistema (`fig9`–`fig11`) e nella Table II di Bekker.
+2. L'esecuzione delle repliche statistiche indipendenti (`Seed 2 = 23456` e `Seed 3 = 34567`) e del protocollo di verifica con **Pre-Equilibrazione Restrained a 300 K** (`constraints on` sul backbone prima dello stress a 400 K, `Lecture04` Slide 6–9).

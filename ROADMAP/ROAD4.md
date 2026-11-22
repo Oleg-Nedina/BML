@@ -10,7 +10,8 @@
 
 **Stato della Fase 4:**
 - ✅ **Passo 4.1 (Setup Topologico Matched `CHARMM36m + TIP3P + 0.15 M NaCl` & Gate 2 QC):** **COMPLETATO AL 100%** ([`04_md_simulations/matched_systems_qc_report.txt`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/04_md_simulations/matched_systems_qc_report.txt) e [`04_md_simulations/RISULTATI_E_COMMENTO_FASE4_SETUP.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/04_md_simulations/RISULTATI_E_COMMENTO_FASE4_SETUP.md)).
-- 🔄 **Passo 4.2 (Campagna MD Multi-Seed a `400 K`):** **PRONTO AL LANCIO** tramite [`04_md_simulations/run_batch_phase4.sh`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/04_md_simulations/run_batch_phase4.sh).
+- ✅ **Passo 4.2a (Screening MD `Seed 1` a `400 K` su `WT`, `K37L`, `T103L`, `K37L_T103L`, `K37L_H68G_T103L` + Plot Singoli Separati):** **COMPLETATO AL 100% (22 Nov 2026)** tramite [`04_md_simulations/run_4_screening_400K.sh`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/04_md_simulations/run_4_screening_400K.sh). Tutti i plot singoli sono in [`05_analysis/single_runs/`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/05_analysis/single_runs) e analizzati in **[`05_analysis/RISULTATI_E_COMMENTO_SCREENING_400K_SEED1.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/05_analysis/RISULTATI_E_COMMENTO_SCREENING_400K_SEED1.md)**.
+- 🔄 **Passo 4.2b (Campagna di Validazione Finale: Repliche `Seed 2 & 3` + Test con Pre-Equilibrazione Restrained a `300 K`):** **PRONTO AL LANCIO**.
 
 ---
 
