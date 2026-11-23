@@ -85,6 +85,16 @@ echo " [$(date)] AVVIO BATCH FASE 4 — Modalita': $MODE (namd3 +p${NCORES})"
 echo " Totale configurazioni nella coda: ${#CONFS[@]}"
 echo "=========================================================================="
 
+# Normalizza tutti i percorsi relativi nei file .conf (poiché NAMD fa chdir in 04_md_simulations/<VAR>/)
+for cf in 04_md_simulations/*/*.conf; do
+    [[ -f "$cf" ]] || continue
+    sed -i -E \
+        -e 's|([[:space:]])04_md_simulations/[^/]+/|\1|g' \
+        -e 's|([[:space:]])01_structures/|\1../../01_structures/|g' \
+        -e 's|([[:space:]])common/charmm36/|\1../../common/charmm36/|g' \
+        "$cf"
+done
+
 idx=0
 total="${#CONFS[@]}"
 for conf in "${CONFS[@]}"; do
@@ -93,7 +103,7 @@ for conf in "${CONFS[@]}"; do
     dcd="${base}.dcd"
     log="${base}.log"
 
-    if [ -f "$dcd" ] && [ -f "$log" ] && grep -q "End of program" "$log" 2>/dev/null; then
+    if [ -f "$dcd" ] && [ -f "$log" ] && grep -q "End of program" "$log" 2>/dev/null && ! grep -q "FATAL ERROR" "$log" 2>/dev/null; then
         echo " -> [$idx/$total] GIÀ COMPLETATA: $dcd (salto)"
         continue
     fi

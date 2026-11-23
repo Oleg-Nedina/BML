@@ -1,9 +1,11 @@
 # 🗺️ ROAD5.md — Fase 5: Analisi Statistica Multi-Seed (*Bekker Table II*), Ciclo Epistatico e Presentazione Finale (`05_analysis/` & `06_presentation/`)
 
 **Progetto:** Biomolecular Modelling Laboratory (2026) — Team #10 (Oleg Nedina & Alessia Rigoni)  
-**Target:** Confronto Statistico Multi-Seed a `400 K` (`WT` vs `K37L` vs `T103L` vs `K37L_T103L`)  
+**Target:** Confronto Statistico Multi-Sistema a `400 K` (`WT` vs `K37L` vs `T103L` vs `K37L_T103L` vs `K37L_H68G_T103L`) e Campagna di Validazione Finale (`WT` vs `K37L_H68G_T103L`)  
 **Presentazione Finale:** 📅 **Mercoledì 16 Dicembre** (durata massima: **10 minuti**, Slide 4 di [`Laboratory_Project_2026.pdf`](file:///home/olly/UNI/BioMolEng2026/laboratorio/Laboratory_Project_2026.pdf))  
 **Documenti Correlati:**
+- **[`05_analysis/RISULTATI_E_COMMENTO_SCREENING_400K_SEED1.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/05_analysis/RISULTATI_E_COMMENTO_SCREENING_400K_SEED1.md)** (Analisi completa dei risultati delle 5 simulazioni `Seed 1` a `400 K` e dei 15 plot singoli in [`05_analysis/single_runs/`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/05_analysis/single_runs)).
+- **[`ROAD_PER_ALE/04_SPIEGAZIONE_PASSO_B_VALIDAZIONE_FINALE.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/ROAD_PER_ALE/04_SPIEGAZIONE_PASSO_B_VALIDAZIONE_FINALE.md)** & **[`ROADMAP/PASSO_B_VALIDAZIONE_FINALE.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/ROADMAP/PASSO_B_VALIDAZIONE_FINALE.md)** (Spiegazione e protocollo del Passo B di validazione finale `WT` vs `Triplo K37L_H68G_T103L`).
 - [`ROADMAP/ROAD4_ROAD5_POLITICA_DI_VALIDAZIONE.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/ROADMAP/ROAD4_ROAD5_POLITICA_DI_VALIDAZIONE.md) (Protocollo teorico dei 5 Livelli di Validazione e Go/No-Go Gates).
 - [`SCALETTA_PROF/PUNTO_5_EVIDENZA_DECISIONE_E_PRESENTAZIONE.md`](file:///home/olly/UNI/BioMolEng2026/laboratorio/BML/SCALETTA_PROF/PUNTO_5_EVIDENZA_DECISIONE_E_PRESENTAZIONE.md) (Monografia sul Punto 5 della scaletta del Prof e struttura delle 10 Slide).
 

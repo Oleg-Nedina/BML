@@ -1,0 +1,58 @@
+==========================================================================================
+ REPORT SINGOLA SIMULAZIONE: Simulazione 1: Mutante Singolo K37L (ANK2) — 400 K
+==========================================================================================
+Numero totale di frame analizzati : 1252 (2.50 ns a 400 K)
+Finestra equilibrata finale (30%) : Frame 876..1251 (1.75–2.50 ns)
+------------------------------------------------------------------------------------------
+ 1. METRICHE GLOBALI NELLA FINESTRA FINALE (30%):
+    - Q: hydrophilic-all (Bekker r=0.84) : 0.7134 ± 0.0070
+    - Q: all-all         (Bekker r=0.79) : 0.7243 ± 0.0052
+    - Q: hydrophobic-small (r=0.76)      : 0.6590 ± 0.0139
+    - Backbone RMSD Globale              : 4.17 ± 0.33 Å
+    - Functional Mask 3AAA RMSD          : 4.75 ± 0.32 Å
+    - Raggio di Girazione (Rgyr)         : 15.36 ± 0.17 Å
+    - SASA Totale                        : 7941.6 ± 206.2 Å²
+    - % Alpha-Helix (STRIDE)             : 53.23%
+    - H-Bonds Intra-Proteici Unici       : 15.3 ± 3.4
+------------------------------------------------------------------------------------------
+ 2. STABILITA' PER MODULO ANKYRIN REPEAT E INTERFACCE (FINESTRA FINALE 30%):
+    - Q_ANK1 (N-cap, res 1–34)           : 0.7205
+    - Q_ANK2 (Core,  res 35–67)          : 0.6351
+    - Q_ANK3 (Core,  res 68–100)         : 0.6855
+    - Q_ANK4 (C-cap, res 101–118)        : 0.7122
+    - Interfacce (ANK1-2 / ANK2-3 / 3-4) : 0.228 / 0.221 / 0.303
+------------------------------------------------------------------------------------------
+ 3. VALORI LOCALI SUI SITI CHIAVE (37, 60, 68, 102, 103):
+    - Residuo  37 (LEU): <Q_i>_400K = 0.5341 | N_cont_0 =  80 | RMSF_CA = 1.37 Å
+    - Residuo  60 (ASP): <Q_i>_400K = 0.3378 | N_cont_0 =  95 | RMSF_CA = 5.00 Å
+    - Residuo  68 (HSD): <Q_i>_400K = 0.6459 | N_cont_0 =  67 | RMSF_CA = 2.93 Å
+    - Residuo 102 (LEU): <Q_i>_400K = 0.5016 | N_cont_0 =  93 | RMSF_CA = 3.00 Å
+    - Residuo 103 (THR): <Q_i>_400K = 0.5284 | N_cont_0 =  79 | RMSF_CA = 2.16 Å
+------------------------------------------------------------------------------------------
+ 4. RESIDUI DELLO SCAFFOLD LOCALMENTE INSTABILI (<Q_i>_400K < 0.60, N_0 >= 30): 25 residui
+    * Res  10 (LEU) -> <Q_i> = 0.5493 (N_0 = 89, RMSF = 1.02 Å)
+    * Res  21 (TYR) -> <Q_i> = 0.5396 (N_0 = 118, RMSF = 1.42 Å)
+    * Res  28 (VAL) -> <Q_i> = 0.5204 (N_0 = 64, RMSF = 2.27 Å)
+    * Res  32 (LEU) -> <Q_i> = 0.5656 (N_0 = 73, RMSF = 1.37 Å)
+    * Res  37 (LEU) -> <Q_i> = 0.5341 (N_0 = 80, RMSF = 1.37 Å)
+    * Res  39 (LEU) -> <Q_i> = 0.5781 (N_0 = 86, RMSF = 1.20 Å)
+    * Res  40 (HSD) -> <Q_i> = 0.5588 (N_0 = 96, RMSF = 1.26 Å)
+    * Res  46 (GLY) -> <Q_i> = 0.5153 (N_0 = 67, RMSF = 2.38 Å)
+    * Res  48 (LEU) -> <Q_i> = 0.5641 (N_0 = 78, RMSF = 1.23 Å)
+    * Res  54 (LEU) -> <Q_i> = 0.5616 (N_0 = 83, RMSF = 1.17 Å)
+    * Res  55 (LEU) -> <Q_i> = 0.5693 (N_0 = 93, RMSF = 1.29 Å)
+    * Res  57 (LYS) -> <Q_i> = 0.5651 (N_0 = 74, RMSF = 2.18 Å)
+    * Res  59 (ALA) -> <Q_i> = 0.5431 (N_0 = 52, RMSF = 4.12 Å)
+    * Res  60 (ASP) -> <Q_i> = 0.3378 (N_0 = 95, RMSF = 5.00 Å)
+    * Res  61 (ILE) -> <Q_i> = 0.4250 (N_0 = 78, RMSF = 3.54 Å)
+    * Res  62 (ASN) -> <Q_i> = 0.4749 (N_0 = 75, RMSF = 3.24 Å)
+    * Res  63 (ALA) -> <Q_i> = 0.5562 (N_0 = 67, RMSF = 2.96 Å)
+    * Res  64 (PRO) -> <Q_i> = 0.4699 (N_0 = 82, RMSF = 2.98 Å)
+    * Res  70 (THR) -> <Q_i> = 0.5959 (N_0 = 74, RMSF = 1.28 Å)
+    * Res  87 (LEU) -> <Q_i> = 0.5901 (N_0 = 105, RMSF = 1.40 Å)
+    * Res  94 (LYS) -> <Q_i> = 0.5073 (N_0 = 74, RMSF = 2.52 Å)
+    * Res  97 (LYS) -> <Q_i> = 0.4525 (N_0 = 60, RMSF = 3.29 Å)
+    * Res 102 (LEU) -> <Q_i> = 0.5016 (N_0 = 93, RMSF = 3.00 Å)
+    * Res 103 (THR) -> <Q_i> = 0.5284 (N_0 = 79, RMSF = 2.16 Å)
+    * Res 115 (ALA) -> <Q_i> = 0.5966 (N_0 = 82, RMSF = 1.72 Å)
+==========================================================================================
