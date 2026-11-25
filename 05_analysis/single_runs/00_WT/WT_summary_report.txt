@@ -1,74 +1,104 @@
 ==========================================================================================
  REPORT SINGOLA SIMULAZIONE: Wild-Type (2MYO) — 400 K (Seed 1)
 ==========================================================================================
-Numero totale di frame analizzati : 1252 (2.50 ns a 400 K)
-Finestra equilibrata finale (30%) : Frame 876..1251 (1.75–2.50 ns)
+Numero totale di frame analizzati : 1251 (2.50 ns a 400 K)
+Finestra equilibrata finale (30%) : Frame 875..1250 (1.75–2.50 ns)
 ------------------------------------------------------------------------------------------
  1. METRICHE GLOBALI NELLA FINESTRA FINALE (30%):
-    - Q: hydrophilic-all (Bekker r=0.84) : 0.6750 ± 0.0067
-    - Q: all-all         (Bekker r=0.79) : 0.6948 ± 0.0054
-    - Q: hydrophobic-small (r=0.76)      : 0.6433 ± 0.0154
-    - Backbone RMSD Globale              : 6.68 ± 0.52 Å
-    - Functional Mask 3AAA RMSD          : 7.27 ± 0.99 Å
+    - Q: hydrophilic-all (Bekker r=0.84) : 0.7248 ± 0.0068
+    - Q: all-all         (Bekker r=0.79) : 0.7495 ± 0.0052
+    - Q: hydrophobic-small (r=0.76)      : 0.7193 ± 0.0170
+    - Backbone RMSD Globale              : 6.69 ± 0.53 Å
+    - Functional Mask 3AAA RMSD          : 7.33 ± 0.97 Å
     - Raggio di Girazione (Rgyr)         : 15.74 ± 0.18 Å
-    - SASA Totale                        : 8838.8 ± 177.4 Å²
+    - SASA Totale                        : 8839.1 ± 177.3 Å²
     - % Alpha-Helix (STRIDE)             : 53.78%
     - H-Bonds Intra-Proteici Unici       : 13.1 ± 3.1
 ------------------------------------------------------------------------------------------
- 2. STABILITA' PER MODULO ANKYRIN REPEAT E INTERFACCE (FINESTRA FINALE 30%):
-    - Q_ANK1 (N-cap, res 1–34)           : 0.6959
-    - Q_ANK2 (Core,  res 35–67)          : 0.6015
-    - Q_ANK3 (Core,  res 68–100)         : 0.6660
-    - Q_ANK4 (C-cap, res 101–118)        : 0.6881
-    - Interfacce (ANK1-2 / ANK2-3 / 3-4) : 0.113 / 0.138 / 0.247
+ 2. STABILITA' PER REGIONE STRUTTURALE (YANG ET AL. 1998) E INTERFACCE (FINESTRA FINALE 30%):
+    - Q_Nterm (res 1–27)                 : 0.7616
+    - Q_Rep1  (Ankyrin Rep 1, res 28–60) : 0.6471
+    - Q_Rep2  (Ankyrin Rep 2, res 61–93) : 0.7123
+    - Q_Cterm (res 94–118)               : 0.7447
+    - Interfacce (N-R1 / R1-R2 / R2-C)   : 0.178 / 0.187 / 0.189
 ------------------------------------------------------------------------------------------
  3. VALORI LOCALI SUI SITI CHIAVE (37, 60, 68, 102, 103):
-    - Residuo  37 (LYS): <Q_i>_400K = 0.4845 | N_cont_0 =  93 | RMSF_CA = 2.96 Å
-    - Residuo  60 (ASP): <Q_i>_400K = 0.4645 | N_cont_0 =  81 | RMSF_CA = 2.53 Å
-    - Residuo  68 (HSD): <Q_i>_400K = 0.7139 | N_cont_0 =  49 | RMSF_CA = 3.63 Å
-    - Residuo 102 (LEU): <Q_i>_400K = 0.4942 | N_cont_0 =  95 | RMSF_CA = 4.20 Å
-    - Residuo 103 (THR): <Q_i>_400K = 0.5075 | N_cont_0 =  84 | RMSF_CA = 3.16 Å
+    - Residuo  37 (LYS): <Q_i>_400K = 0.4000 | N_cont_0 = 105 | RMSF_CA = 2.96 Å
+    - Residuo  60 (ASP): <Q_i>_400K = 0.3840 | N_cont_0 =  88 | RMSF_CA = 2.53 Å
+    - Residuo  68 (HSD): <Q_i>_400K = 0.7742 | N_cont_0 =  44 | RMSF_CA = 3.63 Å
+    - Residuo 102 (LEU): <Q_i>_400K = 0.6840 | N_cont_0 =  62 | RMSF_CA = 4.20 Å
+    - Residuo 103 (THR): <Q_i>_400K = 0.6271 | N_cont_0 =  63 | RMSF_CA = 3.17 Å
 ------------------------------------------------------------------------------------------
- 4. RESIDUI DELLO SCAFFOLD LOCALMENTE INSTABILI (<Q_i>_400K < 0.60, N_0 >= 30): 41 residui
-    * Res   6 (PHE) -> <Q_i> = 0.5630 (N_0 = 97, RMSF = 1.60 Å)
-    * Res  10 (LEU) -> <Q_i> = 0.4948 (N_0 = 91, RMSF = 2.06 Å)
-    * Res  15 (LEU) -> <Q_i> = 0.5756 (N_0 = 85, RMSF = 1.61 Å)
-    * Res  21 (TYR) -> <Q_i> = 0.5532 (N_0 = 94, RMSF = 1.61 Å)
-    * Res  27 (ASP) -> <Q_i> = 0.4494 (N_0 = 66, RMSF = 3.32 Å)
-    * Res  28 (VAL) -> <Q_i> = 0.4040 (N_0 = 67, RMSF = 4.25 Å)
-    * Res  29 (ASN) -> <Q_i> = 0.5736 (N_0 = 53, RMSF = 4.30 Å)
-    * Res  30 (ARG) -> <Q_i> = 0.5703 (N_0 = 57, RMSF = 4.27 Å)
-    * Res  31 (THR) -> <Q_i> = 0.5677 (N_0 = 52, RMSF = 3.80 Å)
-    * Res  32 (LEU) -> <Q_i> = 0.3973 (N_0 = 75, RMSF = 3.81 Å)
-    * Res  33 (GLU) -> <Q_i> = 0.5925 (N_0 = 44, RMSF = 3.48 Å)
-    * Res  35 (GLY) -> <Q_i> = 0.5522 (N_0 = 39, RMSF = 4.92 Å)
-    * Res  37 (LYS) -> <Q_i> = 0.4845 (N_0 = 93, RMSF = 2.96 Å)
-    * Res  39 (LEU) -> <Q_i> = 0.5920 (N_0 = 83, RMSF = 1.90 Å)
-    * Res  46 (GLY) -> <Q_i> = 0.3842 (N_0 = 81, RMSF = 3.22 Å)
-    * Res  48 (LEU) -> <Q_i> = 0.4645 (N_0 = 90, RMSF = 2.44 Å)
-    * Res  50 (ILE) -> <Q_i> = 0.4702 (N_0 = 108, RMSF = 1.77 Å)
-    * Res  51 (LEU) -> <Q_i> = 0.4804 (N_0 = 122, RMSF = 1.86 Å)
-    * Res  53 (PHE) -> <Q_i> = 0.5335 (N_0 = 114, RMSF = 2.05 Å)
-    * Res  54 (LEU) -> <Q_i> = 0.5313 (N_0 = 85, RMSF = 1.86 Å)
-    * Res  55 (LEU) -> <Q_i> = 0.5599 (N_0 = 96, RMSF = 2.63 Å)
-    * Res  57 (LYS) -> <Q_i> = 0.5811 (N_0 = 66, RMSF = 2.62 Å)
-    * Res  60 (ASP) -> <Q_i> = 0.4645 (N_0 = 81, RMSF = 2.53 Å)
-    * Res  61 (ILE) -> <Q_i> = 0.4693 (N_0 = 81, RMSF = 3.46 Å)
-    * Res  62 (ASN) -> <Q_i> = 0.4945 (N_0 = 80, RMSF = 4.01 Å)
-    * Res  64 (PRO) -> <Q_i> = 0.4406 (N_0 = 91, RMSF = 3.53 Å)
-    * Res  65 (ASP) -> <Q_i> = 0.5991 (N_0 = 59, RMSF = 3.91 Å)
-    * Res  71 (PRO) -> <Q_i> = 0.5995 (N_0 = 89, RMSF = 2.11 Å)
-    * Res  86 (LEU) -> <Q_i> = 0.5842 (N_0 = 83, RMSF = 1.57 Å)
-    * Res  87 (LEU) -> <Q_i> = 0.5772 (N_0 = 103, RMSF = 1.70 Å)
-    * Res  88 (LEU) -> <Q_i> = 0.5517 (N_0 = 81, RMSF = 1.94 Å)
-    * Res  90 (LYS) -> <Q_i> = 0.5746 (N_0 = 62, RMSF = 2.58 Å)
-    * Res  91 (GLY) -> <Q_i> = 0.5797 (N_0 = 50, RMSF = 2.73 Å)
-    * Res  93 (ASP) -> <Q_i> = 0.5427 (N_0 = 56, RMSF = 2.82 Å)
-    * Res  94 (LYS) -> <Q_i> = 0.4553 (N_0 = 70, RMSF = 2.36 Å)
-    * Res  95 (THR) -> <Q_i> = 0.5911 (N_0 = 58, RMSF = 2.62 Å)
-    * Res  97 (LYS) -> <Q_i> = 0.5063 (N_0 = 59, RMSF = 4.39 Å)
-    * Res 102 (LEU) -> <Q_i> = 0.4942 (N_0 = 95, RMSF = 4.20 Å)
-    * Res 103 (THR) -> <Q_i> = 0.5075 (N_0 = 84, RMSF = 3.16 Å)
-    * Res 110 (ASN) -> <Q_i> = 0.5509 (N_0 = 83, RMSF = 3.35 Å)
-    * Res 113 (ILE) -> <Q_i> = 0.5376 (N_0 = 96, RMSF = 2.75 Å)
+ 4. RESIDUI DELLO SCAFFOLD LOCALMENTE INSTABILI/DEBOLI (N_0 >= 30):
+    - Con <Q_i>_400K < 0.60 (Critici) : 21 residui
+    - Con <Q_i>_400K < 0.75 (Deboli)  : 69 residui
+    * Res   6 (PHE) -> <Q_i> = 0.6020 [DEBOLE  <0.75] (N_0 = 83, RMSF = 1.60 Å)
+    * Res  10 (LEU) -> <Q_i> = 0.5786 [CRITICO <0.60] (N_0 = 74, RMSF = 2.06 Å)
+    * Res  13 (GLY) -> <Q_i> = 0.6979 [DEBOLE  <0.75] (N_0 = 49, RMSF = 2.48 Å)
+    * Res  15 (LEU) -> <Q_i> = 0.6774 [DEBOLE  <0.75] (N_0 = 67, RMSF = 1.61 Å)
+    * Res  19 (LYS) -> <Q_i> = 0.7403 [DEBOLE  <0.75] (N_0 = 79, RMSF = 1.56 Å)
+    * Res  21 (TYR) -> <Q_i> = 0.6316 [DEBOLE  <0.75] (N_0 = 80, RMSF = 1.61 Å)
+    * Res  22 (VAL) -> <Q_i> = 0.7379 [DEBOLE  <0.75] (N_0 = 71, RMSF = 1.82 Å)
+    * Res  25 (GLY) -> <Q_i> = 0.6906 [DEBOLE  <0.75] (N_0 = 40, RMSF = 2.98 Å)
+    * Res  26 (GLU) -> <Q_i> = 0.6426 [DEBOLE  <0.75] (N_0 = 46, RMSF = 3.22 Å)
+    * Res  27 (ASP) -> <Q_i> = 0.4969 [CRITICO <0.60] (N_0 = 58, RMSF = 3.32 Å)
+    * Res  28 (VAL) -> <Q_i> = 0.4954 [CRITICO <0.60] (N_0 = 55, RMSF = 4.26 Å)
+    * Res  29 (ASN) -> <Q_i> = 0.6654 [DEBOLE  <0.75] (N_0 = 45, RMSF = 4.31 Å)
+    * Res  30 (ARG) -> <Q_i> = 0.6309 [DEBOLE  <0.75] (N_0 = 53, RMSF = 4.27 Å)
+    * Res  31 (THR) -> <Q_i> = 0.6515 [DEBOLE  <0.75] (N_0 = 46, RMSF = 3.80 Å)
+    * Res  32 (LEU) -> <Q_i> = 0.4379 [CRITICO <0.60] (N_0 = 67, RMSF = 3.81 Å)
+    * Res  33 (GLU) -> <Q_i> = 0.4883 [CRITICO <0.60] (N_0 = 54, RMSF = 3.49 Å)
+    * Res  35 (GLY) -> <Q_i> = 0.6633 [DEBOLE  <0.75] (N_0 = 31, RMSF = 4.93 Å)
+    * Res  37 (LYS) -> <Q_i> = 0.4000 [CRITICO <0.60] (N_0 = 105, RMSF = 2.96 Å)
+    * Res  38 (PRO) -> <Q_i> = 0.7065 [DEBOLE  <0.75] (N_0 = 73, RMSF = 1.96 Å)
+    * Res  39 (LEU) -> <Q_i> = 0.5881 [CRITICO <0.60] (N_0 = 84, RMSF = 1.90 Å)
+    * Res  40 (HSD) -> <Q_i> = 0.5395 [CRITICO <0.60] (N_0 = 111, RMSF = 1.88 Å)
+    * Res  42 (ALA) -> <Q_i> = 0.6941 [DEBOLE  <0.75] (N_0 = 81, RMSF = 1.66 Å)
+    * Res  43 (ALA) -> <Q_i> = 0.7138 [DEBOLE  <0.75] (N_0 = 61, RMSF = 1.89 Å)
+    * Res  46 (GLY) -> <Q_i> = 0.4826 [CRITICO <0.60] (N_0 = 61, RMSF = 3.23 Å)
+    * Res  48 (LEU) -> <Q_i> = 0.5383 [CRITICO <0.60] (N_0 = 67, RMSF = 2.45 Å)
+    * Res  49 (GLU) -> <Q_i> = 0.6888 [DEBOLE  <0.75] (N_0 = 62, RMSF = 2.43 Å)
+    * Res  50 (ILE) -> <Q_i> = 0.5695 [CRITICO <0.60] (N_0 = 78, RMSF = 1.78 Å)
+    * Res  51 (LEU) -> <Q_i> = 0.5365 [CRITICO <0.60] (N_0 = 90, RMSF = 1.86 Å)
+    * Res  52 (GLU) -> <Q_i> = 0.7328 [DEBOLE  <0.75] (N_0 = 70, RMSF = 2.42 Å)
+    * Res  53 (PHE) -> <Q_i> = 0.6304 [DEBOLE  <0.75] (N_0 = 84, RMSF = 2.06 Å)
+    * Res  54 (LEU) -> <Q_i> = 0.6402 [DEBOLE  <0.75] (N_0 = 70, RMSF = 1.86 Å)
+    * Res  55 (LEU) -> <Q_i> = 0.6482 [DEBOLE  <0.75] (N_0 = 78, RMSF = 2.63 Å)
+    * Res  56 (LEU) -> <Q_i> = 0.7059 [DEBOLE  <0.75] (N_0 = 60, RMSF = 2.90 Å)
+    * Res  57 (LYS) -> <Q_i> = 0.6190 [DEBOLE  <0.75] (N_0 = 60, RMSF = 2.62 Å)
+    * Res  59 (ALA) -> <Q_i> = 0.6840 [DEBOLE  <0.75] (N_0 = 48, RMSF = 3.43 Å)
+    * Res  60 (ASP) -> <Q_i> = 0.3840 [CRITICO <0.60] (N_0 = 88, RMSF = 2.53 Å)
+    * Res  61 (ILE) -> <Q_i> = 0.5282 [CRITICO <0.60] (N_0 = 70, RMSF = 3.46 Å)
+    * Res  62 (ASN) -> <Q_i> = 0.6619 [DEBOLE  <0.75] (N_0 = 59, RMSF = 4.02 Å)
+    * Res  63 (ALA) -> <Q_i> = 0.7477 [DEBOLE  <0.75] (N_0 = 52, RMSF = 3.12 Å)
+    * Res  64 (PRO) -> <Q_i> = 0.5152 [CRITICO <0.60] (N_0 = 75, RMSF = 3.52 Å)
+    * Res  65 (ASP) -> <Q_i> = 0.6330 [DEBOLE  <0.75] (N_0 = 56, RMSF = 3.90 Å)
+    * Res  70 (THR) -> <Q_i> = 0.5836 [CRITICO <0.60] (N_0 = 85, RMSF = 2.42 Å)
+    * Res  71 (PRO) -> <Q_i> = 0.6084 [DEBOLE  <0.75] (N_0 = 86, RMSF = 2.11 Å)
+    * Res  72 (LEU) -> <Q_i> = 0.6781 [DEBOLE  <0.75] (N_0 = 76, RMSF = 1.77 Å)
+    * Res  73 (LEU) -> <Q_i> = 0.7281 [DEBOLE  <0.75] (N_0 = 79, RMSF = 1.90 Å)
+    * Res  74 (SER) -> <Q_i> = 0.6655 [DEBOLE  <0.75] (N_0 = 71, RMSF = 2.13 Å)
+    * Res  76 (VAL) -> <Q_i> = 0.7410 [DEBOLE  <0.75] (N_0 = 72, RMSF = 1.48 Å)
+    * Res  81 (VAL) -> <Q_i> = 0.6563 [DEBOLE  <0.75] (N_0 = 69, RMSF = 1.58 Å)
+    * Res  83 (CYS) -> <Q_i> = 0.6786 [DEBOLE  <0.75] (N_0 = 79, RMSF = 1.39 Å)
+    * Res  84 (VAL) -> <Q_i> = 0.7125 [DEBOLE  <0.75] (N_0 = 72, RMSF = 1.14 Å)
+    * Res  86 (LEU) -> <Q_i> = 0.6784 [DEBOLE  <0.75] (N_0 = 70, RMSF = 1.57 Å)
+    * Res  87 (LEU) -> <Q_i> = 0.6909 [DEBOLE  <0.75] (N_0 = 80, RMSF = 1.70 Å)
+    * Res  88 (LEU) -> <Q_i> = 0.5913 [CRITICO <0.60] (N_0 = 65, RMSF = 1.94 Å)
+    * Res  90 (LYS) -> <Q_i> = 0.6650 [DEBOLE  <0.75] (N_0 = 52, RMSF = 2.57 Å)
+    * Res  91 (GLY) -> <Q_i> = 0.6091 [DEBOLE  <0.75] (N_0 = 48, RMSF = 2.73 Å)
+    * Res  92 (ALA) -> <Q_i> = 0.6056 [DEBOLE  <0.75] (N_0 = 48, RMSF = 3.20 Å)
+    * Res  93 (ASP) -> <Q_i> = 0.4952 [CRITICO <0.60] (N_0 = 62, RMSF = 2.82 Å)
+    * Res  94 (LYS) -> <Q_i> = 0.5037 [CRITICO <0.60] (N_0 = 61, RMSF = 2.35 Å)
+    * Res  95 (THR) -> <Q_i> = 0.5984 [CRITICO <0.60] (N_0 = 59, RMSF = 2.62 Å)
+    * Res  96 (VAL) -> <Q_i> = 0.6642 [DEBOLE  <0.75] (N_0 = 48, RMSF = 3.79 Å)
+    * Res  97 (LYS) -> <Q_i> = 0.4138 [CRITICO <0.60] (N_0 = 73, RMSF = 4.39 Å)
+    * Res 101 (GLY) -> <Q_i> = 0.7164 [DEBOLE  <0.75] (N_0 = 50, RMSF = 3.63 Å)
+    * Res 102 (LEU) -> <Q_i> = 0.6840 [DEBOLE  <0.75] (N_0 = 62, RMSF = 4.20 Å)
+    * Res 103 (THR) -> <Q_i> = 0.6271 [DEBOLE  <0.75] (N_0 = 63, RMSF = 3.17 Å)
+    * Res 104 (ALA) -> <Q_i> = 0.6782 [DEBOLE  <0.75] (N_0 = 49, RMSF = 1.85 Å)
+    * Res 107 (ALA) -> <Q_i> = 0.6719 [DEBOLE  <0.75] (N_0 = 50, RMSF = 2.26 Å)
+    * Res 110 (ASN) -> <Q_i> = 0.7144 [DEBOLE  <0.75] (N_0 = 62, RMSF = 3.34 Å)
+    * Res 113 (ILE) -> <Q_i> = 0.6975 [DEBOLE  <0.75] (N_0 = 78, RMSF = 2.74 Å)
+    * Res 114 (LYS) -> <Q_i> = 0.7069 [DEBOLE  <0.75] (N_0 = 86, RMSF = 2.66 Å)
 ==========================================================================================

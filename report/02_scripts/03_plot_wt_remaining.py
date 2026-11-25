@@ -10,10 +10,9 @@ DT_NS = 0.002  # 2 ps between saved frames: verify using DCD/log if available
 
 
 def md_series(variable, temp, column=1):
-    """Discard reference PDB (frame 0); return approximate MD time and values."""
+    """Return MD time from t=0 (Frame 0 of DCD) and values."""
     a = np.loadtxt(DATA / f"{variable}_{temp}.dat")
-    a = a[a[:, 0] >= 1]
-    return (a[:, 0] - 1) * DT_NS, a[:, column]
+    return a[:, 0] * DT_NS, a[:, column]
 
 
 def add_series(ax, variable, temp, column=1, multiplier=1.0):
@@ -70,17 +69,16 @@ plt.close(fig)
 
 # FIGURE 3: script-defined regions and their contacts with the full protein
 fig, axes = plt.subplots(2, 1, figsize=(10, 8), sharex=True, sharey=True)
-region_names = [(4, "1–34"), (5, "35–67"), (6, "68–100"), (7, "101–118")]
+region_names = [(4, "N-terminal (1–27)"), (5, "Ankyrin repeat 1 (28–60)"), (6, "Ankyrin repeat 2 (61–93)"), (7, "C-terminal (94–118)")]
 for ax, temp in zip(axes, ("300K", "400K")):
     a = np.loadtxt(DATA / f"q_time_{temp}.dat")
-    a = a[a[:, 0] >= 1]
-    t = (a[:, 0] - 1) * DT_NS
+    t = a[:, 0] * DT_NS
     for column, name in region_names:
         ax.plot(t, a[:, column], linewidth=1.0,
                 label=f"Region {name}")
     ax.set_title(f"Regional contact retention — {temp}")
     ax.set_ylabel("Fraction of reference contacts")
-    ax.set_ylim(0.5, 0.9)
+    ax.set_ylim(0.55, 1.03)
     ax.grid(alpha=0.25)
     ax.legend(ncol=2, fontsize=8)
 axes[-1].set_xlabel("Approximate MD time (ns)")

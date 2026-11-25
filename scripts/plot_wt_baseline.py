@@ -58,10 +58,10 @@ is_mask = np.array(is_mask)
 
 def add_ank_bands(ax):
     bands = [
-        (1, 34, "#e8f1fa", "ANK1"),
-        (35, 67, "#e6f7f5", "ANK2"),
-        (68, 100, "#fff2e6", "ANK3"),
-        (101, 118, "#eafaea", "ANK4")
+        (1, 27, "#e8f1fa", "N-term"),
+        (28, 60, "#e6f7f5", "Rep1"),
+        (61, 93, "#fff2e6", "Rep2"),
+        (94, 118, "#eafaea", "C-term")
     ]
     for r_start, r_end, col, lbl in bands:
         ax.axvspan(r_start, r_end, color=col, alpha=0.65, zorder=0)
@@ -181,13 +181,13 @@ ax.set_ylabel("$R_g$ (Å)")
 ax.grid(True, linestyle="--", alpha=0.4)
 ax.legend(frameon=True)
 
-# D: Q-value per singolo Ankyrin Repeat (ANK1..ANK4) a 400 K
+# D: Q-value per Regione Strutturale (Yang et al. 1998) a 400 K
 ax = axes2[1, 1]
-ax.plot(q_400[:, 0], q_400[:, 4], lw=1.8, color="#1f77b4", label="ANK1 (N-cap, res 1-34)")
-ax.plot(q_400[:, 0], q_400[:, 5], lw=1.8, color="#17becf", label="ANK2 (Core, res 35-67)")
-ax.plot(q_400[:, 0], q_400[:, 6], lw=1.8, color="#ff7f0e", label="ANK3 (Core, res 68-100)")
-ax.plot(q_400[:, 0], q_400[:, 7], lw=1.8, color="#2ca02c", label="ANK4 (C-cap, res 101-118)")
-ax.set_title("D. Repeat-Resolved $Q(t)$ at 400 K (ANK1–ANK4)", fontsize=12, fontweight="bold")
+ax.plot(q_400[:, 0], q_400[:, 4], lw=1.8, color="#1f77b4", label="N-terminal (1–27)")
+ax.plot(q_400[:, 0], q_400[:, 5], lw=1.8, color="#17becf", label="Ankyrin Repeat 1 (28–60)")
+ax.plot(q_400[:, 0], q_400[:, 6], lw=1.8, color="#ff7f0e", label="Ankyrin Repeat 2 (61–93)")
+ax.plot(q_400[:, 0], q_400[:, 7], lw=1.8, color="#2ca02c", label="C-terminal (94–118)")
+ax.set_title("D. Region-Resolved $Q(t)$ at 400 K (Yang et al. 1998)", fontsize=12, fontweight="bold")
 ax.set_xlabel("Trajectory Frame")
 ax.set_ylabel("Native Contacts Fraction $Q$")
 ax.set_ylim(0.4, 1.03)

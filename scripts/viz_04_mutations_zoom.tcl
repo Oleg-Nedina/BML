@@ -43,8 +43,9 @@ mol new $mut_pdb
 mol rename top "Mutant_K37L_H68G_T103L"
 mol delrep 0 top
 
-# ANK1 (1-34, Blu), ANK2 (35-67, Ciano), ANK3 (68-100, Arancio), ANK4 (101-118, Verde)
-foreach {r_range cid} {"1 to 34" 0 "35 to 67" 10 "68 to 100" 3 "101 to 118" 7} {
+# Regioni strutturali Yang et al. (1998):
+# N-term (1-27, Blu), Repeat 1 (28-60, Ciano), Repeat 2 (61-93, Arancio), C-term (94-118, Verde)
+foreach {r_range cid} {"1 to 27" 0 "28 to 60" 10 "61 to 93" 3 "94 to 118" 7} {
     mol representation NewCartoon 0.30 20.0 4.1 0
     mol color ColorID $cid
     mol selection "resid $r_range"
@@ -75,10 +76,10 @@ mol addrep top
 
 display resetview
 puts "\n=========================================================================="
-puts " SCENA 3D VMD CARICATA: Confronto Matched WT (Rosso) vs Mutanti (Name)"
-puts "   - Residuo 37  (ANK2): LYS 37 (WT Rosso) -> LEU 37 (Mutato)"
-puts "   - Residuo 68  (ANK3): HIS 68 (WT Rosso) -> GLY 68 (Mutato)"
-puts "   - Residuo 103 (ANK4): THR 103 (WT Rosso) -> LEU 103 (Mutato)"
+puts " SCENA 3D VMD CARICATA (Yang et al. 1998): Matched WT (Rosso) vs Mutanti (Name)"
+puts "   - Residuo 37  (Repeat 1, 28-60):   LYS 37 (WT Rosso) -> LEU 37 (Mutato)"
+puts "   - Residuo 68  (Repeat 2, 61-93):   HIS 68 (WT Rosso) -> GLY 68 (Mutato)"
+puts "   - Residuo 103 (C-terminal, 94-118): THR 103 (WT Rosso) -> LEU 103 (Mutato)"
 puts "   - Viola: Ponte H inter-repeat protetto HIS 40 -> SER 74"
 puts " Per salvare l'immagine per la Slide 6: File -> Render -> Snapshot / Tachyon"
 puts "==========================================================================\n"

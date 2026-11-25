@@ -1,0 +1,32 @@
+=====================================================================================================
+ CONFRONTO DIRETTO PER IL PROF. GAUTIERI: WILD-TYPE (2MYO) vs TRIPLO MUTANTE (K37L + H68G + T103L)
+ Condizioni Matched: CHARMM36m + TIP3P (12 Å) + 0.15 M NaCl | 400 K | 2.50 ns | Finestra Finale 30%
+ Riferimento Q-value: Frame 0 della traiettoria DCD minimizzata -> Q(0) = 1.0000
+=====================================================================================================
+Osservabile (1.75–2.50 ns a 400 K)         Wild-Type (WT)         Triplo (K37L+H68G+T103L)  Delta (Triplo - WT)
+-----------------------------------------------------------------------------------------------------
+ΔΔG FoldX BuildModel (n=5 run, kcal/mol)   +0.00 ± 0.00           -5.03 ± 0.21              -5.03 kcal/mol
+Q: all-all (Bekker r=0.79 con Tm)          0.7495 ± 0.0052        0.7786 ± 0.0046           +0.0291 (+2.91%)
+Q: hydrophilic-all (Bekker r=0.84 con Tm)  0.7248 ± 0.0068        0.7563 ± 0.0061           +0.0315 (+3.15%)
+Q: hydrophobic-small (Bekker r=0.76)       0.7193 ± 0.0170        0.7156 ± 0.0127           -0.0037 (-0.37%)
+Q_Nterm (N-terminal, res 1–27)             0.7616                 0.7737                    +0.0122
+Q_Rep1 (Repeat 1 critico, res 28–60)       0.6471                 0.7249                    +0.0778
+Q_Rep2 (Repeat 2, res 61–93)               0.7123                 0.7179                    +0.0056
+Q_Cterm (C-terminal, res 94–118)           0.7447                 0.7730                    +0.0283
+Interfaccia Q_int(N-term – Rep1)           0.1780                 0.3789                    +0.2010
+Backbone RMSD Globale (Å)                  6.69 ± 0.53 Å          3.30 ± 0.41 Å             -3.38 Å (-50.6%)
+Sito Funzionale 3AAA RMSD (24 res, Å)      7.33 ± 0.97 Å          2.89 ± 0.25 Å             -4.44 Å (-60.5%)
+Raggio di Girazione Rgyr (Å)               15.74 ± 0.18 Å         14.97 ± 0.21 Å            -0.77 Å
+SASA Totale (Å²)                           8839.1 ± 177.3 Å²      7646.8 ± 234.5 Å²         -1192.2 Å²
+% Alpha-Helix (STRIDE)                     53.78%                 53.11%                    -0.66%
+H-Bonds Intra-Proteici Unici               13.1 ± 3.1             14.4 ± 3.5                +1.3
+Residui Scaffold Deboli (<Q_i> < 0.75)     69 residui             59 residui                -10 residui
+Residui Scaffold Critici (<Q_i> < 0.60)    21 residui             11 residui                -10 residui
+-----------------------------------------------------------------------------------------------------
+ FLUTTUAZIONE LOCALE RMSF(Cα) E <Q_i>_400K SUI SITI CHIAVE:
+  - Res  37 (LYS -> LEU): RMSF 2.96 Å -> 0.91 Å (-2.05 Å) | <Q_i> 0.400 -> 0.582 (+0.182)
+  - Res  60 (ASP -> ASP): RMSF 2.53 Å -> 1.50 Å (-1.03 Å) | <Q_i> 0.384 -> 0.437 (+0.053)
+  - Res  68 (HSD -> GLY): RMSF 3.63 Å -> 1.94 Å (-1.68 Å) | <Q_i> 0.774 -> 0.780 (+0.006)
+  - Res 102 (LEU -> LEU): RMSF 4.20 Å -> 2.56 Å (-1.65 Å) | <Q_i> 0.684 -> 0.663 (-0.021)
+  - Res 103 (THR -> LEU): RMSF 3.17 Å -> 2.83 Å (-0.34 Å) | <Q_i> 0.627 -> 0.574 (-0.053)
+=====================================================================================================

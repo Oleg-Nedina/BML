@@ -24,19 +24,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 RUN_SPECS = [
-    ("WT",              "00_WT",              "Wild-Type (2MYO) — 400 K (Seed 1)",                     [],             "#d62728"),
-    ("K37L",            "01_K37L",            "Simulazione 1: Mutante Singolo K37L (ANK2) — 400 K",    [37],           "#1f77b4"),
-    ("T103L",           "02_T103L",           "Simulazione 2: Mutante Singolo T103L (ANK4) — 400 K",   [103],          "#ff7f0e"),
-    ("K37L_T103L",      "03_K37L_T103L",      "Simulazione 3: Doppio Mutante K37L+T103L — 400 K",      [37, 103],      "#2ca02c"),
-    ("K37L_H68G_T103L", "04_K37L_H68G_T103L", "Simulazione 4: Triplo Mutante K37L+H68G+T103L — 400 K", [37, 68, 103],  "#9467bd"),
-    ("H68G",            "05_H68G",            "Simulazione Extra: Mutante Singolo H68G (ANK3) — 400 K",[68],           "#17becf"),
+    ("WT",              "00_WT",              "Wild-Type (2MYO) — 400 K (Seed 1)",                         [],             "#d62728"),
+    ("K37L",            "01_K37L",            "Simulazione 1: Mutante Singolo K37L (Repeat 1) — 400 K",    [37],           "#1f77b4"),
+    ("T103L",           "02_T103L",           "Simulazione 2: Mutante Singolo T103L (C-terminal) — 400 K", [103],          "#ff7f0e"),
+    ("K37L_T103L",      "03_K37L_T103L",      "Simulazione 3: Doppio Mutante K37L+T103L — 400 K",          [37, 103],      "#2ca02c"),
+    ("K37L_H68G_T103L", "04_K37L_H68G_T103L", "Simulazione 4: Triplo Mutante K37L+H68G+T103L — 400 K",     [37, 68, 103],  "#9467bd"),
+    ("H68G",            "05_H68G",            "Simulazione Extra: Mutante Singolo H68G (Repeat 2) — 400 K",[68],           "#17becf"),
 ]
 
 ANK_BOUNDS = [
-    ("ANK1 (1–34)",    1,  34, "#e8f4f8"),
-    ("ANK2 (35–67)",  35,  67, "#fff2e6"),
-    ("ANK3 (68–100)", 68, 100, "#eef8e8"),
-    ("ANK4 (101–118)",101, 118, "#f5eef8"),
+    ("N-term (1–27)",    1,  27, "#e8f4f8"),
+    ("Repeat 1 (28–60)", 28, 60, "#fff2e6"),
+    ("Repeat 2 (61–93)", 61, 93, "#eef8e8"),
+    ("C-term (94–118)",  94, 118, "#f5eef8"),
 ]
 
 
@@ -171,18 +171,18 @@ def process_single_run(vname, folder_name, title_label, mut_resids, main_color):
     ax.grid(True, linestyle=":", alpha=0.5)
     ax.legend(loc="lower left", fontsize=8.5)
 
-    # Pannello B: Q-value per Modulo Ankyrin Repeat (ANK1..ANK4)
+    # Pannello B: Q-value per Regione Strutturale (Yang et al. 1998)
     ax = axes[1]
     ax.axvspan(t_win_start, 2.50, color="#fff8dc", alpha=0.8)
-    ax.plot(time_ns, q_arr[:, 4], color="#1f77b4", lw=1.7, label=f"ANK1 (N-cap, 1–34) -> {np.mean(q_arr[f_start:,4]):.4f}")
-    ax.plot(time_ns, q_arr[:, 5], color="#d62728", lw=2.1, label=f"ANK2 (Core, 35–67) -> {np.mean(q_arr[f_start:,5]):.4f}")
-    ax.plot(time_ns, q_arr[:, 6], color="#2ca02c", lw=1.7, label=f"ANK3 (Core, 68–100) -> {np.mean(q_arr[f_start:,6]):.4f}")
-    ax.plot(time_ns, q_arr[:, 7], color="#9467bd", lw=1.9, label=f"ANK4 (C-cap, 101–118) -> {np.mean(q_arr[f_start:,7]):.4f}")
+    ax.plot(time_ns, q_arr[:, 4], color="#1f77b4", lw=1.7, label=f"N-terminal (1–27) -> {np.mean(q_arr[f_start:,4]):.4f}")
+    ax.plot(time_ns, q_arr[:, 5], color="#d62728", lw=2.1, label=f"Ankyrin Repeat 1 (28–60) -> {np.mean(q_arr[f_start:,5]):.4f}")
+    ax.plot(time_ns, q_arr[:, 6], color="#2ca02c", lw=1.7, label=f"Ankyrin Repeat 2 (61–93) -> {np.mean(q_arr[f_start:,6]):.4f}")
+    ax.plot(time_ns, q_arr[:, 7], color="#9467bd", lw=1.9, label=f"C-terminal (94–118) -> {np.mean(q_arr[f_start:,7]):.4f}")
     ax.axhline(0.60, color="#b22222", ls="--", lw=1.1, label="Soglia critica Q = 0.60")
     ax.set_xlabel("Tempo di Simulazione (ns)", fontweight="bold")
-    ax.set_ylabel("Q-value del Modulo Ankyrin Q_ANK(t)", fontweight="bold")
-    ax.set_ylim(0.40, 1.02)
-    ax.set_title("B. Stabilità Risolta per Modulo Ankyrin Repeat (ANK1–ANK4)", fontweight="bold", fontsize=10.5)
+    ax.set_ylabel("Q-value per Regione (Yang et al. 1998)", fontweight="bold")
+    ax.set_ylim(0.45, 1.02)
+    ax.set_title("B. Stabilità Risolta per Regione Strutturale (Yang et al. 1998)", fontweight="bold", fontsize=10.5)
     ax.grid(True, linestyle=":", alpha=0.5)
     ax.legend(loc="lower left", fontsize=8.5)
 
@@ -198,27 +198,33 @@ def process_single_run(vname, folder_name, title_label, mut_resids, main_color):
     fig.suptitle(f"{title_label}\nProfilo Locale per Residuo: Contatti Nativi <Q_i>_400K e Fluttuazione RMSF(Cα)",
                  fontsize=12.5, fontweight="bold", y=0.98)
 
-    # Identificazione residui instabili dello scaffold (<Q_i> < 0.60, N_cont >= 30, non terminali 1-3, 116-118)
-    unstable_scaf_mask = (is_mask == 0) & (res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.60)
+    # Identificazione residui instabili dello scaffold (<Q_i> < 0.75 e < 0.60, N_cont >= 30, non terminali 1-3, 116-118)
+    unstable_scaf_mask = (is_mask == 0) & (res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.75)
+    severe_scaf_mask = (is_mask == 0) & (res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.60)
     n_unst_scaf = int(np.sum(unstable_scaf_mask))
+    n_sev_scaf = int(np.sum(severe_scaf_mask))
 
     # Pannello A: <Q_i>_400K per residuo
     ax = axes[0]
     add_ank_shading(ax, 0.15, 1.05, label_top=True)
     bar_colors = []
-    for r, m, u in zip(res_ids, is_mask, unstable_scaf_mask):
+    for r, m, u, sev in zip(res_ids, is_mask, unstable_scaf_mask, severe_scaf_mask):
         if r in mut_resids:
             bar_colors.append("#2ca02c")  # Verde brillante per i siti mutati
         elif m == 1:
             bar_colors.append("#aec7e8")  # Azzurro per la Functional Mask 3AAA
+        elif sev:
+            bar_colors.append("#b22222")  # Rosso scuro per residui fortemente instabili (<0.60)
         elif u:
-            bar_colors.append("#d62728")  # Rosso per residui dello scaffold instabili (<0.60)
+            bar_colors.append("#ff7f0e")  # Arancio/Rosso per residui deboli (<0.75)
         else:
-            bar_colors.append("#4c72b0")  # Blu standard per scaffold stabile
+            bar_colors.append("#4c72b0")  # Blu standard per scaffold stabile (>=0.75)
 
     ax.bar(res_ids, qi_vals, color=bar_colors, width=0.82, edgecolor="none", zorder=3)
-    ax.axhline(0.60, color="#d62728", ls="--", lw=1.4, zorder=4,
-               label=f"Soglia instabilità <Q_i> = 0.60 (Residui scaffold instabili: {n_unst_scaf})")
+    ax.axhline(0.75, color="#ff7f0e", ls="--", lw=1.3, zorder=4,
+               label=f"Soglia debolezza <Q_i> < 0.75 (Residui scaffold < 0.75: {n_unst_scaf})")
+    ax.axhline(0.60, color="#b22222", ls=":", lw=1.3, zorder=4,
+               label=f"Soglia critica <Q_i> < 0.60 (Residui scaffold < 0.60: {n_sev_scaf})")
 
     # Evidenzia i residui mutati
     for mr in mut_resids:
@@ -281,21 +287,24 @@ def process_single_run(vname, folder_name, title_label, mut_resids, main_color):
         if hb_arr is not None and len(hb_arr) == nf:
             f.write(f"    - H-Bonds Intra-Proteici Unici       : {np.mean(hb_arr[f_start:,1]):.1f} ± {np.std(hb_arr[f_start:,1]):.1f}\n")
         f.write("------------------------------------------------------------------------------------------\n")
-        f.write(" 2. STABILITA' PER MODULO ANKYRIN REPEAT E INTERFACCE (FINESTRA FINALE 30%):\n")
-        f.write(f"    - Q_ANK1 (N-cap, res 1–34)           : {np.mean(q_arr[f_start:,4]):.4f}\n")
-        f.write(f"    - Q_ANK2 (Core,  res 35–67)          : {np.mean(q_arr[f_start:,5]):.4f}\n")
-        f.write(f"    - Q_ANK3 (Core,  res 68–100)         : {np.mean(q_arr[f_start:,6]):.4f}\n")
-        f.write(f"    - Q_ANK4 (C-cap, res 101–118)        : {np.mean(q_arr[f_start:,7]):.4f}\n")
-        f.write(f"    - Interfacce (ANK1-2 / ANK2-3 / 3-4) : {np.mean(q_arr[f_start:,8]):.3f} / {np.mean(q_arr[f_start:,9]):.3f} / {np.mean(q_arr[f_start:,10]):.3f}\n")
+        f.write(" 2. STABILITA' PER REGIONE STRUTTURALE (YANG ET AL. 1998) E INTERFACCE (FINESTRA FINALE 30%):\n")
+        f.write(f"    - Q_Nterm (res 1–27)                 : {np.mean(q_arr[f_start:,4]):.4f}\n")
+        f.write(f"    - Q_Rep1  (Ankyrin Rep 1, res 28–60) : {np.mean(q_arr[f_start:,5]):.4f}\n")
+        f.write(f"    - Q_Rep2  (Ankyrin Rep 2, res 61–93) : {np.mean(q_arr[f_start:,6]):.4f}\n")
+        f.write(f"    - Q_Cterm (res 94–118)               : {np.mean(q_arr[f_start:,7]):.4f}\n")
+        f.write(f"    - Interfacce (N-R1 / R1-R2 / R2-C)   : {np.mean(q_arr[f_start:,8]):.3f} / {np.mean(q_arr[f_start:,9]):.3f} / {np.mean(q_arr[f_start:,10]):.3f}\n")
         f.write("------------------------------------------------------------------------------------------\n")
         f.write(f" 3. VALORI LOCALI SUI SITI CHIAVE (37, 60, 68, 102, 103):\n")
         for r_focus in [37, 60, 68, 102, 103]:
             idx = r_focus - 1
             f.write(f"    - Residuo {r_focus:3d} ({res_names[idx]:3s}): <Q_i>_400K = {qi_vals[idx]:.4f} | N_cont_0 = {n_cont[idx]:3d} | RMSF_CA = {rmsf_arr[idx,1]:.2f} Å\n")
         f.write("------------------------------------------------------------------------------------------\n")
-        f.write(f" 4. RESIDUI DELLO SCAFFOLD LOCALMENTE INSTABILI (<Q_i>_400K < 0.60, N_0 >= 30): {n_unst_scaf} residui\n")
+        f.write(f" 4. RESIDUI DELLO SCAFFOLD LOCALMENTE INSTABILI/DEBOLI (N_0 >= 30):\n")
+        f.write(f"    - Con <Q_i>_400K < 0.60 (Critici) : {n_sev_scaf} residui\n")
+        f.write(f"    - Con <Q_i>_400K < 0.75 (Deboli)  : {n_unst_scaf} residui\n")
         for idx in np.where(unstable_scaf_mask)[0]:
-            f.write(f"    * Res {res_ids[idx]:3d} ({res_names[idx]:3s}) -> <Q_i> = {qi_vals[idx]:.4f} (N_0 = {n_cont[idx]}, RMSF = {rmsf_arr[idx,1]:.2f} Å)\n")
+            tag_s = "[CRITICO <0.60]" if qi_vals[idx] < 0.60 else "[DEBOLE  <0.75]"
+            f.write(f"    * Res {res_ids[idx]:3d} ({res_names[idx]:3s}) -> <Q_i> = {qi_vals[idx]:.4f} {tag_s} (N_0 = {n_cont[idx]}, RMSF = {rmsf_arr[idx,1]:.2f} Å)\n")
         f.write("==========================================================================================\n")
 
     print(f"[OK] Plot e report individuali per {vname} salvati in: {out_dir}/")

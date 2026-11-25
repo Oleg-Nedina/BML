@@ -24,31 +24,31 @@ display ambientocclusion on
 # Cancella la rappresentazione di default (Lines)
 mol delrep 0 top
 
-# 2. Rappresentazione 0: ANK1 (resid 1 to 34) - Blu (ColorID 0)
+# 2. Rappresentazione 0: N-terminal (resid 1 to 27: H1, H2) - Blu (ColorID 0)
 mol representation NewCartoon 0.30 20.0 4.1 0
 mol color ColorID 0
-mol selection "protein and resid 1 to 34"
+mol selection "protein and resid 1 to 27"
 mol material AOChalky
 mol addrep top
 
-# 3. Rappresentazione 1: ANK2 (resid 35 to 67) - Ciano/Teal (ColorID 10)
+# 3. Rappresentazione 1: Ankyrin Repeat 1 (resid 28 to 60: loop 32-36, H3, H4) - Ciano/Teal (ColorID 10)
 mol representation NewCartoon 0.30 20.0 4.1 0
 mol color ColorID 10
-mol selection "protein and resid 35 to 67"
+mol selection "protein and resid 28 to 60"
 mol material AOChalky
 mol addrep top
 
-# 4. Rappresentazione 2: ANK3 (resid 68 to 100) - Arancione (ColorID 3)
+# 4. Rappresentazione 2: Ankyrin Repeat 2 (resid 61 to 93: loop 65-69, H5, H6) - Arancione (ColorID 3)
 mol representation NewCartoon 0.30 20.0 4.1 0
 mol color ColorID 3
-mol selection "protein and resid 68 to 100"
+mol selection "protein and resid 61 to 93"
 mol material AOChalky
 mol addrep top
 
-# 5. Rappresentazione 3: ANK4 C-cap (resid 101 to 118) - Verde (ColorID 7)
+# 5. Rappresentazione 3: C-terminal (resid 94 to 118: H7) - Verde (ColorID 7)
 mol representation NewCartoon 0.30 20.0 4.1 0
 mol color ColorID 7
-mol selection "protein and resid 101 to 118"
+mol selection "protein and resid 94 to 118"
 mol material AOChalky
 mol addrep top
 
@@ -77,11 +77,11 @@ mol addrep top
 
 display resetview
 puts "\n=================================================================="
-puts "  SCENA 3D PRONTA PER LE FOTO DELLE SLIDE (Fase 1)!"
-puts "  - ANK1 (1-34):   Blu"
-puts "  - ANK2 (35-67):  Ciano"
-puts "  - ANK3 (68-100): Arancione"
-puts "  - ANK4 (101-118):Verde"
+puts "  SCENA 3D PRONTA PER LE FOTO DELLE SLIDE (Fase 1 - Yang et al. 1998)!"
+puts "  - N-terminal       (1-27,  H1-H2): Blu"
+puts "  - Ankyrin Repeat 1 (28-60, H3-H4): Ciano"
+puts "  - Ankyrin Repeat 2 (61-93, H5-H6): Arancione"
+puts "  - C-terminal       (94-118, H7):   Verde"
 puts "  - Triade Funzionale (TRP 8, ASP 44, GLU 78): Bastoncini Rossi"
 puts "  - Rete H-bond Istidine (HIS 40-SER 74 e LYS 37-HIS 67-GLY 35): Colori Atomici"
 puts ""

@@ -41,15 +41,16 @@ if {[file exists "02_wt_baseline/wt_400K.dcd"] && [file exists "02_wt_baseline/w
 set functional_mask {4 5 7 8 9 11 12 14 16 17 34 36 41 44 45 47 66 67 69 77 78 80 99 100}
 
 # Procedura completa che unisce analysisMD.tcl + Q-value per una traiettoria (300K o 400K)
+# Come in laboratorio/analysisMD.tcl del Prof. Gautieri (righe 4-5) e VMDextensions.tcl (Slide 23),
+# carichiamo direttamente .psf + .dcd così il Frame 0 è il primo frame minimizzato della dinamica (Q(0) = 1.000).
 proc analyze_traj {psf_file pdb_file dcd_file tag} {
     mol new $psf_file
-    mol addfile $pdb_file
     mol addfile $dcd_file waitfor all
 
     set nf [molinfo top get numframes]
     set step 1
     puts "\n=================================================================="
-    puts " ANALISI TRAIETTORIA $tag ($dcd_file): $nf frames totali"
+    puts " ANALISI TRAIETTORIA $tag ($dcd_file): $nf frames totali (Frame 0 = 1° frame DCD)"
     puts "=================================================================="
 
     # Selezioni standard da analysisMD.tcl del Prof. Gautieri
@@ -89,8 +90,7 @@ proc analyze_traj {psf_file pdb_file dcd_file tag} {
 
     # 3. Calcolo RMSF sui CA (analysisMD.tcl righe 44-54)
     puts " -> (3/7) Calcolo RMSF sui CA..."
-    set start_f [expr {$nf > 2 ? 1 : 0}]
-    set rmsfCA [measure rmsf $ca first $start_f last [expr {$nf - 1}]]
+    set rmsfCA [measure rmsf $ca first 0 last [expr {$nf - 1}]]
     set firstAA [lindex [$ca get resid] 0]
     set out_rmsf [open "02_wt_baseline/rmsf_${tag}.dat" w]
     puts $out_rmsf "# Resid RMSF_CA(A)"
@@ -139,16 +139,16 @@ proc analyze_traj {psf_file pdb_file dcd_file tag} {
     }
     close $out_alpha
 
-    # 7. Calcolo Q-value nel tempo (Globale, Chimico Bekker et al. e per Ankyrin Repeat ANK1..4)
-    puts " -> (7/7) Calcolo Q-value (all-all, hydrophilic-all, hydrophobic-small, ANK1..4)..."
+    # 7. Calcolo Q-value nel tempo (Globale, Chimico Bekker et al. e per Regione Strutturale Yang et al. 1998)
+    puts " -> (7/7) Calcolo Q-value (all-all, hydrophilic-all, hydrophobic-small, Regioni Yang 1998: 1-27, 28-60, 61-93, 94-118)..."
     set sel_all   [atomselect top "protein and noh"]
     set sel_phil  [atomselect top "protein and noh and resname ASP GLU GLN ASN ARG LYS HIS HSD HSE HSP"]
     set sel_phob  [atomselect top "protein and noh and resname PHE TYR TRP LEU VAL ILE MET CYS PRO"]
     set sel_small [atomselect top "protein and noh and resname GLY ALA SER THR"]
-    set sel_ank1  [atomselect top "protein and noh and resid 1 to 34"]
-    set sel_ank2  [atomselect top "protein and noh and resid 35 to 67"]
-    set sel_ank3  [atomselect top "protein and noh and resid 68 to 100"]
-    set sel_ank4  [atomselect top "protein and noh and resid 101 to 118"]
+    set sel_ank1  [atomselect top "protein and noh and resid 1 to 27"]
+    set sel_ank2  [atomselect top "protein and noh and resid 28 to 60"]
+    set sel_ank3  [atomselect top "protein and noh and resid 61 to 93"]
+    set sel_ank4  [atomselect top "protein and noh and resid 94 to 118"]
 
     foreach s [list $sel_all $sel_phil $sel_phob $sel_small $sel_ank1 $sel_ank2 $sel_ank3 $sel_ank4] {
         $s frame 0
@@ -197,10 +197,10 @@ analyze_traj "01_structures/2myo_wb_ionized.psf" "01_structures/2myo_wb_ionized.
 
 # ==============================================================================
 # 8. Calcolo <Q_i> per singolo residuo (1..118) negli ultimi 30% dei frame a 400K
-#    (Metodo Bekker, Ma & Kamiya 2019, Protein Science 28:429-438, Table S1)
+#    (Metodo Bekker, Ma & Kamiya 2019, Protein Science 28:429-438, Table S1;
+#     riferimento Frame 0 = primo frame minimizzato di wt_400K.dcd come in analysisMD.tcl)
 # ==============================================================================
 mol new "01_structures/2myo_wb_ionized.psf"
-mol addfile "01_structures/2myo_wb_ionized.pdb"
 mol addfile $dcd_400 waitfor all
 
 set nf [molinfo top get numframes]
@@ -208,7 +208,8 @@ set f_start [expr {int($nf * 0.70)}]
 if {$f_start < 1} { set f_start 1 }
 set n_eval [expr {$nf - $f_start}]
 
-# Allinea prima di salvare il PDB finale
+# Ricomposizione PBC e allineamento sul Frame 0 prima del calcolo e dell'esportazione PDB
+catch {pbc wrap -compound residue -center com -centersel "protein" -all}
 set all_at [atomselect top all]
 set ref_bb [atomselect top "protein and backbone" frame 0]
 set cur_bb [atomselect top "protein and backbone"]
@@ -261,7 +262,7 @@ for {set r 1} {$r <= 118} {incr r} {
         set mean_qi 1.0
     }
 
-    if {$r <= 34} { set rep "ANK1" } elseif {$r <= 67} { set rep "ANK2" } elseif {$r <= 100} { set rep "ANK3" } else { set rep "ANK4" }
+    if {$r <= 27} { set rep "N-term" } elseif {$r <= 60} { set rep "Rep1" } elseif {$r <= 93} { set rep "Rep2" } else { set rep "C-term" }
 
     set in_mask [expr {[lsearch -exact $functional_mask $r] >= 0 ? 1 : 0}]
     if {$in_mask} {
@@ -269,11 +270,13 @@ for {set r 1} {$r <= 118} {incr r} {
     } elseif {$r <= 3 || $r >= 116} {
         set status "TERMINAL"
     } elseif {$mean_qi < 0.60 && $nnc_r >= 30} {
-        set status ">>> UNSTABLE (Q<0.6) <<<"
-    } elseif {$mean_qi < 0.72} {
-        set status "WEAK (0.6<=Q<0.72)"
+        set status ">>> UNSTABLE (Q<0.60) <<<"
+    } elseif {$mean_qi < 0.75 && $nnc_r >= 30} {
+        set status ">> WEAK (0.60<=Q<0.75) <<"
+    } elseif {$mean_qi < 0.85} {
+        set status "MODERATE (0.75<=Q<0.85)"
     } else {
-        set status "STABLE"
+        set status "STABLE (Q>=0.85)"
     }
 
     puts $out_qi [format "%d %s %d %.4f %d" $r $rname $nnc_r $mean_qi $in_mask]

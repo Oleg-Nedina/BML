@@ -17,15 +17,13 @@ for temp in ["300K", "400K"]:
     rmsd = np.loadtxt(base / f"rmsd_{temp}.dat")
     q = np.loadtxt(base / f"q_time_{temp}.dat")
 
-    # VMD frame 0 is the separately loaded reference PDB.
-    # Exclude it from the MD-time plots.
-    # First DCD frame is provisionally placed at t=0.
-    time_ns = (rmsd[1:, 0] - 1) * dt_ns
+    # Frame 0 is the first DCD frame (t = 0 ns, where Q = 1.0 and RMSD = 0.0)
+    time_ns = rmsd[:, 0] * dt_ns
 
     data[temp] = {
         "time": time_ns,
-        "rmsd": rmsd[1:, 1],
-        "q": q[1:, 1],  # Q_all
+        "rmsd": rmsd[:, 1],
+        "q": q[:, 1],  # Q_all (starts from 1.0 at t=0)
     }
 
 def moving_average(values, window=25):

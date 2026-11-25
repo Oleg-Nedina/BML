@@ -57,10 +57,10 @@ BUILDMODEL_DDG = {
 }
 
 ANK_BOUNDS = [
-    ("ANK1 (1–34)",     1,  34, "#e8f4f8"),
-    ("ANK2 (35–67)",   35,  67, "#fff2e6"),
-    ("ANK3 (68–100)",  68, 100, "#eef8e8"),
-    ("ANK4 (101–118)",101, 118, "#f5eef8"),
+    ("N-term (1–27)",    1,  27, "#e8f4f8"),
+    ("Repeat 1 (28–60)", 28, 60, "#fff2e6"),
+    ("Repeat 2 (61–93)", 61, 93, "#eef8e8"),
+    ("C-term (94–118)",  94, 118, "#f5eef8"),
 ]
 
 data_by_var = {}
@@ -99,8 +99,9 @@ for vname in VARIANT_ORDER:
         qi_vals = np.array(qi_vals)
         is_mask = np.array(is_mask)
 
-        scaffold_unstable = int(np.sum((is_mask == 0) & (res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.60)))
-        total_unstable = int(np.sum((res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.60)))
+        scaffold_unstable_60 = int(np.sum((is_mask == 0) & (res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.60)))
+        scaffold_unstable = int(np.sum((is_mask == 0) & (res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.75)))
+        total_unstable = int(np.sum((res_ids > 3) & (res_ids < 116) & (n_cont >= 30) & (qi_vals < 0.75)))
 
         nf = len(q_arr)
         f_start = max(1, int(nf * 0.70))
@@ -128,6 +129,7 @@ for vname in VARIANT_ORDER:
             "hb_win": hb_win_mean,
             "hb_win_std": hb_win_std,
             "scaffold_unstable": scaffold_unstable,
+            "scaffold_unstable_60": scaffold_unstable_60,
             "total_unstable": total_unstable,
         })
 
@@ -164,8 +166,8 @@ with open(report_out, "w") as f:
     f.write("==============================================================================================================================================================\n")
     f.write(" TABLE II (BEKKER, MA & KAMIYA 2019, p. 434): CONFRONTO UNIFICATO A 400 K RISPETTO AL WILD-TYPE (FINESTRA EQUILIBRATA FINALE 30%: 1.75-2.50 ns)\n")
     f.write("==============================================================================================================================================================\n")
-    f.write(f"{'Sistema':<18} {'Seeds':<6} {'ΔΔG_FoldX(kcal/mol)':<21} {'Q: phil-all (r=.84)':<21} {'Q: all-all (r=.79)':<20} {'Q: phob-small':<18} {'RMSD_BB (Å)':<15} {'N_Unstable(Scaf)'}\n")
-    f.write("-" * 145 + "\n")
+    f.write(f"{'Sistema':<18} {'Seeds':<6} {'ΔΔG_FoldX(kcal/mol)':<21} {'Q: phil-all (r=.84)':<21} {'Q: all-all (r=.79)':<20} {'Q: phob-small':<18} {'RMSD_BB (Å)':<15} {'Unst(<.75 / <.60)'}\n")
+    f.write("-" * 148 + "\n")
 
     for vname in active_vars:
         reps = data_by_var[vname]
@@ -175,7 +177,8 @@ with open(report_out, "w") as f:
         q_phil_m, q_phil_s = get_stat(reps, "q_win", 1)
         q_ps_m, q_ps_s = get_stat(reps, "q_win", 2)
         rmsd_m, rmsd_s = get_stat(reps, "obs_win", 0)
-        unst_m, unst_s = get_stat(reps, "scaffold_unstable")
+        unst_m, _ = get_stat(reps, "scaffold_unstable")
+        unst60_m, _ = get_stat(reps, "scaffold_unstable_60")
 
         f.write(
             f"{vname:<18s} {n_s:<6d} "
@@ -184,7 +187,7 @@ with open(report_out, "w") as f:
             f"{q_all_m:.4f} ± {q_all_s:.4f}     "
             f"{q_ps_m:.4f} ± {q_ps_s:.4f}   "
             f"{rmsd_m:.2f} ± {rmsd_s:.2f}    "
-            f"{unst_m:.1f}\n"
+            f"{unst_m:.1f} / {unst60_m:.1f}\n"
         )
 
     f.write("\n==============================================================================================================================================================\n")
@@ -256,7 +259,7 @@ for vname in active_vars:
             label=f"{VARIANT_LABELS[vname]} ({win_m:.4f})")
 ax.set_xlabel("Tempo di Simulazione a 400 K (ns)", fontweight="bold")
 ax.set_ylabel("Q: hydrophilic-all (r = 0.84 con Tm)", fontweight="bold")
-ax.set_ylim(0.60, 0.96)
+ax.set_ylim(0.65, 1.03)
 ax.set_title("A. Evoluzione Temporale Q: hydrophilic-all (Predittore #1 di Tm)", fontweight="bold", fontsize=10.5)
 ax.grid(True, linestyle=":", alpha=0.5)
 ax.legend(loc="upper right", fontsize=8.3)
@@ -276,7 +279,7 @@ for vname in active_vars:
             label=f"{VARIANT_LABELS[vname]} ({win_m:.4f})")
 ax.set_xlabel("Tempo di Simulazione a 400 K (ns)", fontweight="bold")
 ax.set_ylabel("Q: all-all (r = 0.79 con Tm)", fontweight="bold")
-ax.set_ylim(0.62, 0.96)
+ax.set_ylim(0.65, 1.03)
 ax.set_title("B. Evoluzione Temporale Q: all-all (Contatti Nativi Totali)", fontweight="bold", fontsize=10.5)
 ax.grid(True, linestyle=":", alpha=0.5)
 ax.legend(loc="upper right", fontsize=8.3)
@@ -287,10 +290,12 @@ classes = ["Q: hydrophilic-all\n(r = 0.84 con Tm)", "Q: all-all\n(r = 0.79 con T
 col_indices = [1, 0, 2]
 x = np.arange(len(classes))
 w = 0.80 / len(active_vars)
+all_c_means = []
 for i, vname in enumerate(active_vars):
     reps = data_by_var[vname]
     means = [get_stat(reps, "q_win", c)[0] for c in col_indices]
     stds = [get_stat(reps, "q_win", c)[1] for c in col_indices]
+    all_c_means.extend(means)
     offset = (i - (len(active_vars) - 1) / 2.0) * w
     bars = ax.bar(x + offset, means, width=w * 0.92, yerr=stds, capsize=3,
                   color=VARIANT_COLORS[vname], label=VARIANT_LABELS[vname], edgecolor="black", linewidth=0.5)
@@ -300,20 +305,22 @@ for i, vname in enumerate(active_vars):
 ax.set_xticks(x)
 ax.set_xticklabels(classes, fontweight="bold")
 ax.set_ylabel("Q-value Medio (Finestra Finale 30%)", fontweight="bold")
-ax.set_ylim(0.58, 0.78)
+ax.set_ylim(max(0.55, min(all_c_means) - 0.08), min(1.02, max(all_c_means) + 0.07))
 ax.set_title("C. Confronto per Classe Chimica (Bekker et al. 2019, Table II)", fontweight="bold", fontsize=10.5)
 ax.grid(True, axis="y", linestyle=":", alpha=0.5)
 ax.legend(loc="lower right", fontsize=8.0)
 
-# Pannello D: Barplot per Modulo Ankyrin Repeat (ANK1..ANK4)
+# Pannello D: Barplot per Regione Strutturale (Yang et al. 1998)
 ax = axes[1, 1]
-rep_labels = ["ANK1\n(N-cap 1–34)", "ANK2 (Critico)\n(Core 35–67)", "ANK3\n(Core 68–100)", "ANK4\n(C-cap 101–118)"]
+rep_labels = ["N-terminal\n(1–27)", "Repeat 1 (Critico)\n(28–60)", "Repeat 2\n(61–93)", "C-terminal\n(94–118)"]
 rep_cols = [3, 4, 5, 6]
 x = np.arange(len(rep_labels))
+all_d_means = []
 for i, vname in enumerate(active_vars):
     reps = data_by_var[vname]
     means = [get_stat(reps, "q_win", c)[0] for c in rep_cols]
     stds = [get_stat(reps, "q_win", c)[1] for c in rep_cols]
+    all_d_means.extend(means)
     offset = (i - (len(active_vars) - 1) / 2.0) * w
     bars = ax.bar(x + offset, means, width=w * 0.92, yerr=stds, capsize=3,
                   color=VARIANT_COLORS[vname], label=VARIANT_LABELS[vname], edgecolor="black", linewidth=0.5)
@@ -324,7 +331,7 @@ ax.axhline(0.60, color="#d62728", ls="--", lw=1.2, label="Soglia critica Q = 0.6
 ax.set_xticks(x)
 ax.set_xticklabels(rep_labels, fontweight="bold")
 ax.set_ylabel("Q_ANK Medio (Finestra Finale 30%)", fontweight="bold")
-ax.set_ylim(0.55, 0.79)
+ax.set_ylim(max(0.55, min(all_d_means) - 0.08), min(1.02, max(all_d_means) + 0.07))
 ax.set_title("D. Stabilità Risolta per Modulo Ankyrin Repeat (ANK1–ANK4)", fontweight="bold", fontsize=10.5)
 ax.grid(True, axis="y", linestyle=":", alpha=0.5)
 ax.legend(loc="lower right", fontsize=7.8)
@@ -517,7 +524,7 @@ if len(ddg_arr) >= 3:
 
 ax.set_xlabel("ΔΔG FoldX BuildModel (kcal/mol, più negativo = più stabile)", fontweight="bold")
 ax.set_ylabel("Q: all-all Medio in MD a 400 K", fontweight="bold")
-ax.set_ylim(0.685, 0.742)
+ax.set_ylim(min(qall_arr) - 0.015, max(qall_arr) + 0.018)
 ax.invert_xaxis()
 ax.set_title("D. Concordanza tra Design Energetico (FoldX BuildModel) e Dinamica (MD 400 K)", fontweight="bold", fontsize=10.5)
 ax.grid(True, linestyle=":", alpha=0.5)

@@ -42,16 +42,20 @@ proc analyze_replica {psf_file pdb_file dcd_file vname seed_idx functional_mask}
     set tag "${vname}_s${seed_idx}"
     set done_f "05_analysis/${tag}_q_per_residue.dat"
     if {[file exists $done_f] && ([file size $done_f] > 500) && ([file mtime $done_f] >= [file mtime $dcd_file])} {
-        puts ">>> \[SKIP CACHE\] Replica $tag già analizzata in 05_analysis/ ($done_f aggiornato)."
-        return 1
+        set fp_chk [open $done_f r]
+        set first_line [gets $fp_chk]
+        close $fp_chk
+        if {[string match "*Yang1998_Frame0_DCD*" $first_line]} {
+            puts ">>> \[SKIP CACHE\] Replica $tag già analizzata (Yang 1998 + Ref Frame 0 DCD: $done_f)."
+            return 1
+        }
     }
     puts "\n=================================================================="
-    puts " ANALISI REPLICA MATCHED: $tag ($dcd_file)"
+    puts " ANALISI REPLICA MATCHED: $tag ($dcd_file) \[Ref = Frame 0 DCD\]"
     puts "=================================================================="
 
     mol delete all
     mol new $psf_file
-    mol addfile $pdb_file
     mol addfile $dcd_file waitfor all
 
     set nf [molinfo top get numframes]
@@ -103,8 +107,7 @@ proc analyze_replica {psf_file pdb_file dcd_file vname seed_idx functional_mask}
     close $out_obs
 
     # 3. RMSF sui Carboni Alfa (CA)
-    set start_f [expr {$nf > 2 ? 1 : 0}]
-    set rmsfCA [measure rmsf $ca first $start_f last [expr {$nf - 1}]]
+    set rmsfCA [measure rmsf $ca first 0 last [expr {$nf - 1}]]
     set firstAA [lindex [$ca get resid] 0]
     set out_rmsf [open "05_analysis/${tag}_rmsf.dat" w]
     puts $out_rmsf "# Resid RMSF_CA(A)"
@@ -120,15 +123,15 @@ proc analyze_replica {psf_file pdb_file dcd_file vname seed_idx functional_mask}
            -outfile "05_analysis/${tag}_hbonds.dat" \
            -detailout "05_analysis/${tag}_hbonds_details.txt"
 
-    # 5. Q-value nel tempo (Classi Chimiche Bekker + Singoli Repeat ANK1..4 + Interfacce Inter-Repeat)
+    # 5. Q-value nel tempo (Classi Chimiche Bekker + Regioni Strutturali Yang et al. 1998 + Interfacce)
     set sel_all   [atomselect top "protein and noh"]
     set sel_phil  [atomselect top "protein and noh and resname ASP GLU GLN ASN ARG LYS HIS HSD HSE HSP"]
     set sel_phob  [atomselect top "protein and noh and resname PHE TYR TRP LEU VAL ILE MET CYS PRO"]
     set sel_small [atomselect top "protein and noh and resname GLY ALA SER THR"]
-    set sel_ank1  [atomselect top "protein and noh and resid 1 to 34"]
-    set sel_ank2  [atomselect top "protein and noh and resid 35 to 67"]
-    set sel_ank3  [atomselect top "protein and noh and resid 68 to 100"]
-    set sel_ank4  [atomselect top "protein and noh and resid 101 to 118"]
+    set sel_ank1  [atomselect top "protein and noh and resid 1 to 27"]
+    set sel_ank2  [atomselect top "protein and noh and resid 28 to 60"]
+    set sel_ank3  [atomselect top "protein and noh and resid 61 to 93"]
+    set sel_ank4  [atomselect top "protein and noh and resid 94 to 118"]
 
     foreach s [list $sel_all $sel_phil $sel_phob $sel_small $sel_ank1 $sel_ank2 $sel_ank3 $sel_ank4] {
         $s frame 0
@@ -184,7 +187,7 @@ proc analyze_replica {psf_file pdb_file dcd_file vname seed_idx functional_mask}
     set n_eval [expr {$nf - $f_start}]
 
     set out_qi [open "05_analysis/${tag}_q_per_residue.dat" w]
-    puts $out_qi "# Resid Resname N_contacts_0 Mean_Qi Is_Functional_Mask"
+    puts $out_qi "# Resid Resname N_contacts_0 Mean_Qi Is_Functional_Mask (Ref: Yang1998_Frame0_DCD)"
 
     for {set r 1} {$r <= 118} {incr r} {
         set r_sel   [atomselect top "protein and noh and resid $r"]
@@ -222,9 +225,11 @@ proc analyze_replica {psf_file pdb_file dcd_file vname seed_idx functional_mask}
     return 1
 }
 
-# 1. Analizza le 3 repliche del Wild-Type (Seed 1 in 02_wt_baseline/wt_400K.dcd, Seed 2 e 3 in 04_md_simulations/WT/)
+# 1. Analizza le 3 repliche del Wild-Type (preferisce wt_400K_seed1.dcd se presente, altrimenti 02_wt_baseline/wt_400K.dcd)
+set wt_s1_dcd "04_md_simulations/WT/wt_400K_seed1.dcd"
+if {![file exists $wt_s1_dcd]} { set wt_s1_dcd "02_wt_baseline/wt_400K.dcd" }
 analyze_replica "01_structures/2myo_wb_ionized.psf" "01_structures/2myo_wb_ionized.pdb" \
-    "02_wt_baseline/wt_400K.dcd" "WT" 1 $functional_mask
+    $wt_s1_dcd "WT" 1 $functional_mask
 analyze_replica "01_structures/2myo_wb_ionized.psf" "01_structures/2myo_wb_ionized.pdb" \
     "04_md_simulations/WT/wt_400K_seed2.dcd" "WT" 2 $functional_mask
 analyze_replica "01_structures/2myo_wb_ionized.psf" "01_structures/2myo_wb_ionized.pdb" \
